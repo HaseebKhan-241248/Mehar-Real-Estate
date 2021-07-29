@@ -19,11 +19,39 @@ class AdminController extends Controller
     }
     public function update_profile_page(Request $request)
     {
-//        dd($request->all());
+        $photo    = "";
+        $password = "";
+        request()->validate([
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        if ($request->photo)
+        {
+            $imageName = time().'.'.$request->photo->extension();
+            $photo =  $request->photo->move(public_path('images'), $imageName);
+            if($request->old_photo!=""  && file_exists(public_path("images/userimage/$request->old_photo")) )
+            {
+                unlink("images/userimage/$request->old_logo");
+            }
+            $photo = $imageName;
+        }
+        else
+        {
+            $photo = $request->old_photo;
+        }
+
+        if($request->password)
+        {
+            $password = Hash::make($request->password);
+        }
+        else
+        {
+            $password = $request->old_password;
+        }
         User::where('id',$request->user_id)->update([
             'name'      => $request->name,
             'email'     => $request->email,
-            'password'  => Hash::make($request->password),
+            'password'  => $password,
+            'photo'     => $photo,
         ]);
         return back()->withstatus(__("Profile Updated Successfully!"));
     }
@@ -75,6 +103,7 @@ class AdminController extends Controller
                 'status'     => "Active",
                 'created_by' => Auth::User()->id,
                 'role'       => 0,
+                'project_id' => $request->project_id,
             ]);
 
             Permission::create([
@@ -84,13 +113,13 @@ class AdminController extends Controller
             ]);
         // }
     }
-  
+
      public function edit($id)
      {
         $data['user'] = User::where('id',$id)->first();
         $data['permission'] = Permission::where('user_id',$id)->first();
         return view('admin.users.edit',$data);
-     }    
+     }
 
      public function update(Request $request)
      {
@@ -102,9 +131,10 @@ class AdminController extends Controller
             'phone'      => $request->phone,
             'address'    => $request->address,
             'cnic'       => $request->cnic,
-            'status'     => $request->status,            
+            'status'     => $request->status,
             'created_by' => Auth::User()->id,
             'role'       => 0,
+            'project_id' => $request->project_id,
         ]);
 
         Permission::create([
@@ -116,8 +146,9 @@ class AdminController extends Controller
 
     public function assign_project()
     {
-        $data['users'] = User::where('role','0')->get();
+        $data['users']    = User::where('role','0')->get();
         $data['projects'] = Project::all();
+        $data['counter']  = 1;
         return view('admin.users.assign_project',$data);
     }
 
@@ -125,7 +156,7 @@ class AdminController extends Controller
     {
         request()->validate([
             'user_id'    => 'required',
-            'project_id' => 'required',      
+            'project_id' => 'required',
         ]);
         User::where('id',$request->user_id)->update([
             'project_id' => $request->project_id,
@@ -136,9 +167,9 @@ class AdminController extends Controller
     public function update_permission()
     {
         $new_permission = [
-            'name'        => 'Partners Share',
-            'id'          => '7',
-            'parent_id'   => '5',
+            'name'        => 'General Journal',
+            'id'          => '33',
+            'parent_id'   => '32',
             'operations'  => [],
         ];
 
@@ -147,11 +178,11 @@ class AdminController extends Controller
         foreach($users as $user)
         {
             $permission_object = Permission::where('user_id',$user->id)->first();
-            $permissions =json_decode(($permission_object)->permission);
-            array_push($permissions,$new_permission);        
+            $permissions       = json_decode(($permission_object)->permission);
+            array_push($permissions,$new_permission);
             $permission_object->permission = json_encode($permissions);
             $permission_object->save();
         }
     }
-    
+
 }

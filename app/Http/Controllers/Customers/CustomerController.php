@@ -15,11 +15,11 @@ class CustomerController extends Controller
     {
         if(Auth::user()->role=="Super Admin")
         {
-            $data['customers'] = Customer::all(); 
+            $data['customers'] = Customer::where('status','=','1')->get(); 
         }
         else
         {
-            $data['customers'] = Customer::where('project_id',Auth::user()->project_id)->get();
+            $data['customers'] = Customer::where('status','=','1')->where('project_id',Auth::user()->project_id)->get();
         }
         $data['counter']   = 1;        
         $data['projects']  = Project::all();
@@ -44,5 +44,19 @@ class CustomerController extends Controller
         $data['customer'] = Customer::where('id',$id)->first();
         $data['bookings'] = Booking::where('customer_id',$id)->get();
         return view('admin.inventory_management.customers.customer_detail',$data);
+    }
+
+    public function delete_customer($id)
+    {
+        // $customer = Customer::where('id',$id)->first();
+        // if($customer->image!=""  && file_exists(public_path($customer->image)) )
+        // {
+        //     unlink($customer->image);
+        // }
+        /////////// -1 means customer has deleted //////////////
+        Customer::where('id',$id)->update([
+            'status' => "-1",
+        ]);
+        return back()->withstatus("Customer Deleted Successfully!");
     }
 }

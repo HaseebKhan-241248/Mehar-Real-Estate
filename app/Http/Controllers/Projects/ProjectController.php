@@ -13,6 +13,7 @@ class ProjectController extends Controller
 {
     public function list()
     {
+
         if((Auth::user()->role)=="Super Admin")
         {
             $data['projects'] = Project::all();
@@ -21,14 +22,15 @@ class ProjectController extends Controller
         {
             $data['projects'] = Project::where('id',Auth::user()->project_id)->get();
         }
-        $data['counter']  = 1;        
+
+        $data['counter']  = 1;
         $data['partners'] = Partner::all();
         return view('admin.inventory_management.projects.list',$data);
     }
     public function store(Request $request)
     {
         $response = Project::createORupdateproject($request);
-       
+
         return back()->withStatus(__($response['message']));
     }
 }

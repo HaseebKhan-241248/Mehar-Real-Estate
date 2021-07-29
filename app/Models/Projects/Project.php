@@ -2,6 +2,7 @@
 
 namespace App\Models\Projects;
 
+use App\Models\Accounts\Account;
 use App\Models\AssignPartner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ class Project extends Model
         'description',
         'status',
         'logo',
-        
+
     ];
     public function GetAssignPartner()
     {
@@ -26,13 +27,12 @@ class Project extends Model
     }
     public static function createORupdateproject($request)
     {
-
         if($request->project_id>0)
         {
-            request()->validate([
-                'name'       => 'required',
-                'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
+                request()->validate([
+                    'name'       => 'required',
+                    'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
 
             if ($request->logo)
             {
@@ -69,6 +69,7 @@ class Project extends Model
                 "status"  => 'success',
                 "message" => 'Project Updated Successfully!'
             ];
+
         }
         else
         {
@@ -100,10 +101,48 @@ class Project extends Model
                 ]);
             }
 
+            ///////////////// creating accounts against project /////////////////
+            Account::create([
+                'account_name'     => "Cash In Hand",
+                'account_type'     => "Assets",
+                'sub_account_type' => "Cash & Bank",
+                'project_id'       => $pro_id->id,
+                'fixed'            => 0,
+                'day'              => date('Y-m-d'),
+                'type'             => "Main",
+                'type2'             => "cashinhand",
+                'status'           => "Active",
+            ]);
+            Account::create([
+                'account_name'     => "Commission Expense Account",
+                'account_type'     => "Expense",
+                'sub_account_type' => "Cost of Goods Sold",
+                'project_id'       => $pro_id->id,
+                'fixed'            => 0,
+                'day'              => date('Y-m-d'),
+                'type'             => "Main",
+                'type2'             => "commissionExpense",
+                'status'           => "Active",
+            ]);
+            Account::create([
+                'account_name'     => "Partner Share Payable",
+                'account_type'     => "Capital",
+                'sub_account_type' => "Partner Equity Account",
+                'project_id'       => $pro_id->id,
+                'fixed'            => 0,
+                'day'              => date('Y-m-d'),
+                'type'             => "Main",
+                'type2'             => "partner_payable",
+                'status'           => "Active",
+            ]);
+
+
             return [
                 "status"  => 'success',
                 "message" => 'Project Created Successfully!'
             ];
+
+
         }
     }
 }

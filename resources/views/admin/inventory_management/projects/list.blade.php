@@ -61,21 +61,26 @@
                                     <button data-toggle="modal" data-target="#form-bp1" type="button"  class="btn btn-primary  "><i class="fa fa-plus"></i> Create New Project</button>
                                     @endcan
                                     @endif
-                                    
+
                                     <span class="panel-subtitle"></span></div>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="p-2">
-                                <center><h3><b>Manage Projects</b></h3></center>
+                                <center>
+                                    <h3>
+                                        <b>Manage Projects</b>
+                                    </h3>
+                                </center>
                                 <table id="table1" class="table table-striped table-hover table-fw-widget">
                                     <thead>
                                     <tr>
                                         <th>Sr#</th>
                                         <th>Project Name</th>
-                                        <th>Location</th>
-                                        <th>Description</th>
-                                        <th>Status</th>
+                                        <th>Total Sale Value</th>
+                                        <th>% Sold Out</th>
+                                        <th>Recovery</th>
+                                        <th>Average Rate/House(Marla)</th>
                                         <th>Logo</th>
                                         <th>Actions</th>
                                     </tr>
@@ -97,7 +102,7 @@
                                                     <button data-toggle="modal" data-target="#edit{{ $project->id }}" type="button"  class="btn btn-sm btn-primary  "><i class="fa fa-edit"></i></button>
                                                     @endcan
                                                     @endif
-                                                    
+
                                                 </td>
                                             </tr>
                                             <div id="edit{{ $project->id }}"  role="dialog" class="modal fade colored-header colored-header-primary">

@@ -36,7 +36,7 @@
                     <div class="row  " >
                         <div class="col-md-3">
                          <label for="" class="text-primary">User Name <span class="text-danger">*</span></label>
-                         
+
                          <div class="col-md-12 input-group input-group-sm xs-mb-15">
                             <input type="text" placeholder="Enter the User Name" value="{{ old('name') }}" name="name" class="form-control" required id="name" >
                         </div>
@@ -48,19 +48,19 @@
                             <input type="email" placeholder="Enter Email" class="form-control " value="{{ old('email') }}" name="email" required id="email" >
                         </div>
                         </div>
-                        
+
                         <div class="col-md-3">
                          <label for="" class="text-primary">Phone <span class="text-danger">*</span></label>
                          <div class="col-md-12 input-group input-group-sm xs-mb-15">
                             <input type="text" placeholder="Enter Phone No" value="{{ old('phone') }}" name="phone" class="form-control " required id="phone" >
                         </div>
-                        </div>    
+                        </div>
                         <div class="col-md-3">
                             <label for="" class="text-primary">Address <span class="text-danger">*</span></label>
                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                <input type="text" placeholder="Enter Address" value="{{ old('address') }}" name="address" class="form-control " required id="address" >
                            </div>
-                           </div>                    
+                           </div>
                     </div>
                     <div class="row">
                         <div class="col-md-3">
@@ -68,6 +68,15 @@
                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                 <input type="text" placeholder="Enter CNIC" value="{{ old('cnic') }}" name="cnic" class="form-control " required id="cnic" >
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="" class="text-primary">Select Project</label>
+                            <select name="project_id" id="project_id" class="select2">
+                                <option value="">Select Project</option>
+                                @foreach(\App\Models\Projects\Project::all() as $project)
+                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <center><h2 class="text-primary">Roles & Permissions</h2></center>
@@ -123,7 +132,7 @@
                 <br>
                 <button class="btn btn-primary btn-sm"  id="saveBtn">Save</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -243,7 +252,7 @@ request.done(function( msg ) {
     }
     else
     {
-        
+
         toastr.success("User Saved Successfully!");
         location.reload();
     }

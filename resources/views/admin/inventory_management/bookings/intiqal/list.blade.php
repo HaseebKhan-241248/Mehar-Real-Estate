@@ -74,7 +74,7 @@
                                                 <br><br>
                                                 <button class="btn btn-primary btn-sm">Save</button>
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -92,10 +92,20 @@
                                                 <tr >
                                                     <th class="text-center">Sr#</th>
                                                     <th class="text-center">Intiqal#</th>
-                                                    <th class="text-center">Intiqal Amount</th>
+                                                    <th class="text-center">Intiqal </th>
                                                     <th class="text-center">Intiqal Attachment</th>
                                                 </tr>
                                                 </thead>
+                                                <tbody>
+                                                    @foreach ($intiqals as $intiqal)
+                                                    <tr>
+                                                        <td class="text-center">{{ $counter++ }}</td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

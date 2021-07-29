@@ -40,7 +40,8 @@ class InstallmentController extends Controller
     public function save_paid_installment(Request $request)
     {
 
-        $installments      = Installment::where('booking_id',$request->booking_id)->where('description','!=','Booking-1')->where('installment_amount','>',0)->get();
+        $installments      = Installment::where('booking_id',$request->booking_id)->where('description','!=','Booking')->where('installment_amount','>',0)->get();
+//        dd($installments);
     //    dd($installments);
         $paid              = $request->amount_paid;
         $amount_to_be_paid = 0;
@@ -55,11 +56,11 @@ class InstallmentController extends Controller
         {
             if ($count < $request->installment_amount_count)
             {
-                    
+
                 if($paid > 0)
                 {
                     if($paid < $installment->installment_amount)
-                    { 
+                    {
                         // dd($installment->installment_amount);
                         Installment::where('id',$installment->id)->update([
                             'status'             => 1,

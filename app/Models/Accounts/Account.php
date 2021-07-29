@@ -2,6 +2,7 @@
 
 namespace App\Models\Accounts;
 
+use App\Models\Projects\Project;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +23,14 @@ class Account extends Model
         'status',
         'fixed',
         'type',
+        'project_id',
+        'sub_account_type_category',
     ];
+
+    public function Project_Name()
+    {
+        return $this->hasOne(Project::class,'id','project_id');
+    }
 
     public static function savePlotAccount($plotid,$name)
     {

@@ -18,7 +18,7 @@ return [
         'name'        => 'Add New',
         'id'          => '3',
         'parent_id'   => '2',
-        'operations'  => ['Create','Read','',''],
+        'operations'  => ['Create','Read','Update',''],
     ],
     [
         'name'        => 'Manage Accounts',
@@ -26,6 +26,7 @@ return [
         'parent_id'   => '2',
         'operations'  => ['Create','Read','Update','Delete'],
     ],
+
 
     [
         'name'        => 'Partners',
@@ -136,7 +137,7 @@ return [
         'name'        => 'Add New Booking',
         'id'          => '20',
         'parent_id'   => '19',
-        'operations'  => ['Create','Read','Marketers Commision','Dealer Commision'],
+        'operations'  => ['Create','Read','Update','Delete','Marketers Commision','Dealer Commision'],
     ],
 
     [
@@ -175,13 +176,59 @@ return [
         'operations'  => ['','Read','',''],
     ],
 
-    
+
     [
         'name'        => 'Manage Users',
         'id'          => '26',
         'parent_id'   => '25',
         'operations'  => ['Create','Read','Update',''],
     ],
+    [
+        'name'        => 'Journal Voucher',
+        'id'          => '27',
+        'parent_id'   => '2',
+        'operations'  => ['Create','Read','Update','Delete'],
+    ],
+    [
+        'name'        => 'Bank Receipt Voucher',
+        'id'          => '28',
+        'parent_id'   => '2',
+        'operations'  => ['Create','Read','Update','Delete'],
+    ],
+    [
+        'name'        => 'Cash Voucher',
+        'id'          => '29',
+        'parent_id'   => '2',
+        'operations'  => ['Create','Read','Update','Delete'],
+    ],
+    [
+        'name'        => 'Debit Voucher',
+        'id'          => '30',
+        'parent_id'   => '2',
+        'operations'  => ['Create','Read','Update','Delete'],
+    ],
+
+    [
+        'name'        => 'Add Sub Account Category',
+        'id'          => '31',
+        'parent_id'   => '2',
+        'operations'  => ['Create','Read','Update','Delete'],
+    ],
+
+    [
+        'name'        => 'Accounting Reports',
+        'id'          => '32',
+        'parent'      => true,
+        'operations'  => ['','Read','',''],
+    ],
+
+    [
+        'name'        => 'General Journal',
+        'id'          => '33',
+        'parent_id'   => '32',
+        'operations'  => ['','Generate Report','',''],
+    ],
+
 
 ]
 

@@ -56,31 +56,60 @@ class Intiqal extends Model
         //     'intiqal_no'       => ['required', 'unique:intiqals'],
         // ]);
 
-      
-        if ($request->hasFile('intiqal_attachment'))
+        if($request->booking_id>0)
         {
-//            dd("fas");
-            if($request->file('intiqal_attachment')->isValid())
+            $attachment="";
+            if ($request->hasFile('intiqal_attachment'))
             {
-                $random = '3333'.rand(10000000,900000000);
-                
-                $file1  = $request->file('intiqal_attachment');
-                $name1  = $file1->getClientOriginalName();
-                $request->file('intiqal_attachment')->move("public/files/IntiqalAttachments/$random"."$name1");
-                $S = "public/files/IntiqalAttachments/$random"."$name1";
-              
-                parent::create([
-                    'booking_id'         => $booking_id,
-                    'intiqal_no'         => $request->intiqal_no,
-                    'intiqal'            => $request->intiqal_a,
-                    'intiqal_attachment' => $S,
-                    'description'        => "",
-                    'type'               => 'Intiqal',
-                    'status'             => '1',
-                ]);
+//                dd($request->intiqal_attachment);
+                if($request->file('intiqal_attachment')->isValid()) {
+                    $random = '3333' . rand(10000000, 900000000);
+
+                    $file1 = $request->file('intiqal_attachment');
+                    $name1 = $file1->getClientOriginalName();
+                    $request->file('intiqal_attachment')->move("public/files/IntiqalAttachments/$random" . "$name1");
+                    $attachment = "public/files/IntiqalAttachments/$random" . "$name1";
+                }
             }
-            // dd($ScanFile1);
+            else
+            {
+                $attachment = $request->old_intiqal_attachment;
+            }
+            parent::create([
+                'booking_id'         => $booking_id,
+                'intiqal_no'         => $request->intiqal_no,
+                'intiqal'            => $request->intiqal_g,
+                'intiqal_attachment' => $attachment,
+                'description'        => "",
+                'type'               => 'Intiqal',
+                'status'             => '1',
+            ]);
         }
-       
+        else
+        {
+            if ($request->hasFile('intiqal_attachment'))
+            {
+                if($request->file('intiqal_attachment')->isValid())
+                {
+                    $random = '3333'.rand(10000000,900000000);
+
+                    $file1  = $request->file('intiqal_attachment');
+                    $name1  = $file1->getClientOriginalName();
+                    $request->file('intiqal_attachment')->move("public/files/IntiqalAttachments/$random"."$name1");
+                    $S = "public/files/IntiqalAttachments/$random"."$name1";
+
+                    parent::create([
+                        'booking_id'         => $booking_id,
+                        'intiqal_no'         => $request->intiqal_no,
+                        'intiqal'            => $request->intiqal_g,
+                        'intiqal_attachment' => $S,
+                        'description'        => "",
+                        'type'               => 'Intiqal',
+                        'status'             => '1',
+                    ]);
+                }
+                // dd($ScanFile1);
+            }
+        }
     }
 }

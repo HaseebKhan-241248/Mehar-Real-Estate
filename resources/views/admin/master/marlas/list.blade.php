@@ -74,7 +74,7 @@
                                         @foreach($marlas as $marla)
                                             <tr class="gradeC">
                                                 <td>{{$counter++}}</td>
-                                                <td>{{$marla->marla}}-Marls</td>
+                                                <td>{{$marla->marla}}-Marla</td>
                                                 <td>{{$marla->description}}</td>
                                                 <td>
                                                     @if((Auth::user()->role) == 'Super Admin')
@@ -87,7 +87,7 @@
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     @endcan
-                                                    @endif                                                    
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <div id="edit{{ $marla->id }}" tabindex="-1" role="dialog" class="modal fade colored-header colored-header-primary">

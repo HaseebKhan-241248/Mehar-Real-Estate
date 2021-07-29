@@ -14,6 +14,7 @@ return [
         'parent'         => true,
         'operations' => [],
     ],
+
     [
         'name'        => 'Add New',
         'id'          => '3',
@@ -175,14 +176,58 @@ return [
         'operations'  => [],
     ],
 
-    
+
     [
         'name'        => 'Manage Users',
         'id'          => '26',
         'parent_id'   => '25',
         'operations'  => [],
     ],
+    [
+        'name'        => 'Journal Voucher',
+        'id'          => '27',
+        'parent_id'   => '2',
+        'operations'  => [],
+    ],
+    [
+        'name'        => 'Bank Receipt Voucher',
+        'id'          => '28',
+        'parent_id'   => '2',
+        'operations'  => [],
+    ],
+    [
+        'name'        => 'Cash Voucher',
+        'id'          => '29',
+        'parent_id'   => '2',
+        'operations'  => [],
+    ],
+    [
+        'name'        => 'Debit Voucher',
+        'id'          => '30',
+        'parent_id'   => '2',
+        'operations'  => [],
+    ],
 
+    [
+        'name'        => 'Add Sub Account Category',
+        'id'          => '31',
+        'parent_id'   => '2',
+        'operations'  => [],
+    ],
+
+    [
+        'name'        => 'Accounting Reports',
+        'id'          => '32',
+        'parent'      => true,
+        'operations'  => [],
+    ],
+
+    [
+        'name'        => 'General Journal',
+        'id'          => '33',
+        'parent_id'   => '32',
+        'operations'  => [],
+    ],
 ]
 
 ?>

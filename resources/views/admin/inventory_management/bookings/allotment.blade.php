@@ -15,7 +15,7 @@
             background-size: cover ;
             width: 8.3in;
             height: 100%;
-            
+
             margin-left: auto;
             margin-right: auto; */
             border: 100px solid transparent;
@@ -101,12 +101,12 @@
             width: 85%;
             border-bottom: 1px solid;
             height: 20px;
-            
+
         }
         .main-inner-txt p {
             font-weight: bolder;
             margin-top: -3px;
-            
+
         }
 
         .main-content-heading {
@@ -130,7 +130,7 @@
     <div class="letter">
         <div class="container-fluid">
             <div class="letter-inner ">
-                
+
                 <div class="row image-div">
                     <div class="col-md-8">
                         <img class="ml-auto" src="" alt="">
@@ -177,7 +177,7 @@
                             </div>
                             <div class="inner-txt">
                                 <p>
-                                 
+
                                 </p>
                             </div>
                         </div>
@@ -312,7 +312,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md-6">  
+                    <div class="col-md-6">
                         <div class="row pt-2">
                             <div class="main-content">
                                 <p class="">Agreed Price</p>
@@ -347,7 +347,7 @@
                     </ol>
                 </div>
                 <br>
-                <div class="row pt-2 content-div reciept-div">
+                <div class="row pt-1 content-div reciept-div">
                     <div class="col-md-6">
                         <div class="top-text row">
                             <div class="static-txt">
@@ -369,7 +369,6 @@
                         </div>
                     </div>
                 </div>
-                <br><br><br>
             </div>
         </div>
     </div>

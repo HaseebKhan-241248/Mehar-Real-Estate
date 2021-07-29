@@ -39,6 +39,7 @@
                                     <thead>
                                     <tr>
                                         <th>Sr#</th>
+                                        <th>Project Name</th>
                                         <th>Account Name</th>
                                         <th>Account Type</th>
                                         <th>Sub Account type</th>
@@ -51,18 +52,24 @@
                                        @foreach($accounts as $account)
                                        <tr class="gradeC">
                                            <td>{{$counter++}}</td>
+                                           <td>@if($account->Project_Name) {{$account->Project_Name->name}} @endif</td>
                                            <td>{{$account->account_name}}</td>
                                            <td>{{$account->account_type}}</td>
                                            <td>{{$account->sub_account_type}}</td>
                                            <td>{{$account->description}}</td>
                                            <td>{{$account->type}}</td>
-                                           <td></td>
+                                           <td>
+                                               <a href="{{ route('edit.account',[$account->id]) }}" class="btn btn-primary btn-sm">
+                                                   <i class="fa fa-edit"></i>
+                                               </a>
+                                           </td>
                                        </tr>
                                        @endforeach
                                    </tobdy>
                                     <tfoot>
                                     <tr>
                                         <th>Sr#</th>
+                                        <th>Project Name</th>
                                         <th>Account Name</th>
                                         <th>Account Type</th>
                                         <th>Sub Account type</th>

@@ -28,8 +28,14 @@ class Ledger extends Model
         'user_id',
         'bank_name',
         'cheque_no',
+        'cheque_date',
+        'bank_receipt_no',
         'account_title',
     ];
+    public function  Account_Name()
+    {
+        return $this->hasOne(Account::class,'id','account_id');
+    }
     public static function saveAdvancedEntry($request,$booking_id)
     {
         $customer_account = Customer::where('id',$request->customer_id)->first();
@@ -53,7 +59,7 @@ class Ledger extends Model
         }
         else
         {
-            $cash_account = Account::where('type2','=','cashinhand')->first();
+            $cash_account = Account::where('type2','=','cashinhand')->where('project_id',$request->project_id)->first();
             parent::create([
                 'account_id'    => $customer_account->account_id,
                 'booking_id'    => $booking_id,
@@ -319,5 +325,157 @@ class Ledger extends Model
             ]);
         }
         return;
+    }
+
+    public static  function saveJournalVoucherEntry($request,$voucher_id)
+    {
+
+        foreach ($request->account_id as $key => $account_id)
+        {
+            $status=0;
+            if($request->is_posted==1)
+            {
+               $status=0;
+            }
+            else
+            {
+                $status=1;
+            }
+            parent::create([
+                'account_id'      => $account_id,
+                'jv_id'           => $voucher_id,
+                'day'             => date('Y-m-d'),
+                'debit'           => $request->debit[$key],
+                'credit'          => $request->credit[$key],
+                'remarks'         => $request->description[$key],
+                'type'            => "Journal Voucher",
+                'status'          => $status,
+                'user_id'         => Auth::user()->id,
+                'cheque_no'       => $request->cheque_no[$key],
+            ]);
+        }
+        return [
+            'message' => "Journal Voucher Saved Successfully!"
+        ];
+    }
+    public static  function BankReceiptEntry($request,$voucher_id)
+    {
+        $status=0;
+        if($request->is_posted==1)
+        {
+            $status=0;
+        }
+        else
+        {
+            $status=1;
+        }
+        foreach ($request->account_id as $key => $account_id)
+        {
+            parent::create([
+                'account_id'      => $account_id,
+                'jv_id'           => $voucher_id,
+                'day'             => date('Y-m-d'),
+                'debit'           => $request->debit[$key],
+                'credit'          => $request->credit[$key],
+                'remarks'         => $request->description[$key],
+                'type'            => "Bank Receipt",
+                'status'          => $status,
+                'user_id'         => Auth::user()->id,
+                'cheque_no'       => $request->cheque_no[$key],
+                'bank_receipt_no' => $request->bank_receipt_no[$key],
+                'cheque_date'     => $request->cheque_date[$key],
+            ]);
+        }
+        return [
+            'message' => "Bank Receipt Voucher Saved Successfully!"
+        ];
+    }
+    public static  function  CashReceiptEntry($request,$voucher_id)
+    {
+        $status=0;
+        if($request->is_posted==1)
+        {
+            $status=0;
+        }
+        else
+        {
+            $status=1;
+        }
+        $project = Account::where('id',$request->account_id)->first();
+//        dd($project);
+        foreach ($request->account_id as $key => $account_id)
+        {
+            parent::create([
+                'account_id'      => $account_id,
+                'jv_id'           => $voucher_id,
+                'day'             => date('Y-m-d'),
+                'debit'           => 0,
+                'credit'          => $request->credit[$key],
+                'remarks'         => $request->description[$key],
+                'type'            => "Cash Voucher",
+                'status'          => $status,
+                'user_id'         => Auth::user()->id,
+            ]);
+        }
+        $cash_in_hand = Account::where('type2','=','cashinhand')->where('project_id',$project->project_id)->first();
+//        dd($cash_in_hand);
+        parent::create([
+            'account_id'      => $cash_in_hand->id,
+            'jv_id'           => $voucher_id,
+            'day'             => date('Y-m-d'),
+            'debit'           => $request->credit_total,
+            'credit'          => 0,
+            'remarks'         => "Cash Voucher",
+            'type'            => "Cash Voucher",
+            'status'          => $status,
+            'user_id'         => Auth::user()->id,
+        ]);
+        return [
+            'message' => "Cash Voucher Saved Successfully!"
+        ];
+    }
+    public static function  DebitVoucherEntry($request,$voucher_id)
+    {
+        $status=0;
+        if($request->is_posted==1)
+        {
+            $status=0;
+        }
+        else
+        {
+            $status=1;
+        }
+        $project = Account::where('id',$request->account_id)->first();
+//        dd($project);
+        foreach ($request->account_id as $key => $account_id)
+        {
+            parent::create([
+                'account_id'      => $account_id,
+                'jv_id'           => $voucher_id,
+                'day'             => date('Y-m-d'),
+                'debit'           => $request->debit[$key],
+                'credit'          => 0,
+                'remarks'         => $request->description[$key],
+                'type'            => "Debit Voucher",
+                'status'          => $status,
+                'user_id'         => Auth::user()->id,
+            ]);
+        }
+        $cash_in_hand = Account::where('type2','=','cashinhand')->where('project_id',$project->project_id)->first();
+//        dd($cash_in_hand);
+        parent::create([
+            'account_id'      => $cash_in_hand->id,
+            'jv_id'           => $voucher_id,
+            'day'             => date('Y-m-d'),
+            'debit'           => 0,
+            'credit'          => $request->debit_total,
+            'remarks'         => "Debit Voucher",
+            'type'            => "Debit Voucher",
+            'status'          => $status,
+            'user_id'         => Auth::user()->id,
+        ]);
+        return [
+            'message' => "Debit Voucher Saved Successfully!"
+        ];
     }
 }

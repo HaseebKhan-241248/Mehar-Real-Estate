@@ -13,14 +13,14 @@ function calc()
     if (typeof receieved_amt == "Nan")
     {
         receieved_amt = 0;
-    }    
-    agree_price = agree_price-discount;    
+    }
+    agree_price = agree_price-discount;
     var partner_per   = $('#partner_percent').val();
     /// amount paid to partner
 
     var rcvdamount    = $('#partner_amount').val();
     var percentage    = partner_per/100;
-    
+
     if (marla==null || marla=="")
     {
         alert("Please Enter the Plot size ");
@@ -39,16 +39,16 @@ function calc()
         $('#rate_marla').val(rate_per_marla.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#rate_marla_hidden').val(rate_per_marla.toFixed(2));
         $('#total_amount').val(agree_price);
-        
+
         ////////////////// calculating the remaing amount ///////////////
-        
+
         var remaining = parseFloat(agree_price) - receieved_amt;
         $('#remaining_amount').val(remaining.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#remaining_amount_hidden').val(remaining.toFixed(2));
 
         /////////////////// partener amount A//////////////////
 
-        var rcvdamount= parseFloat(remaining) * parseFloat(percentage);        
+        var rcvdamount= parseFloat(agree_price) * parseFloat(percentage);
         $('#partner_amount').val(rcvdamount.toFixed(2));
         var partnerA    = parseFloat(receieved_amt) * parseFloat(percentage);
 
@@ -56,18 +56,28 @@ function calc()
         $('#partner_amount_a_hidden').val(partnerA.toFixed(2));
 
         ///////////////// difference of partner amount////////////////
-        
+
         var diff_partner  = parseFloat(rcvdamount)-partnerA;
         $('#equity_difference').val(diff_partner.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#equity_difference_hidden').val(diff_partner.toFixed(2));
 
         /////////////////// calculation intiqal (A) /////////////////////
+        console.log('percentage');
+        console.log(percentage);
+        console.log('rate_per_marla');
+        console.log(rate_per_marla);
+        var intiqalA = parseFloat(rate_per_marla);
+        console.log('intiqalA');
+        console.log(intiqalA.toFixed(2));
+        var intiqalA2 = receieved_amt/intiqalA.toFixed(2);
+        var intiqalA3 = agree_price/intiqalA.toFixed(2);
 
-        var intiqalA = parseFloat(percentage)*parseFloat(rate_per_marla);
-        var intiqalA2 = rcvdamount/intiqalA;
-
-        $('#intiqal_a').val(intiqalA2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
-        $('#intiqal_a_hidden').val(intiqalA2.toFixed(2));
+        $("#intiqal_g").attr('max',intiqalA2);
+        console.log('see');
+        console.log($("#intiqal_g").attr('max'));
+        $('#intiqal_g').val(intiqalA2.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $('#intiqal_a').val(intiqalA3.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $('#intiqal_a_hidden').val(intiqalA3.toFixed(2));
 
         /////////////////////////// calculate dp% ///////////////////
 
@@ -76,7 +86,7 @@ function calc()
 
         ///////////////////// calculate intiqal difference //////////////
 
-        var in_diff = intiqalg - intiqalA2;
+        var in_diff =  intiqalA2 - intiqalA3;
 
         $('#intiqal_diff').val(in_diff.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#intiqal_diff_hidden').val(in_diff.toFixed(2));
@@ -105,11 +115,18 @@ function calc()
 
         $('#marketer_commision_due').val(mar_comm.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#marketer_commision_due_hidden').val(mar_comm.toFixed(2));
-        
+
         $('#coms_formula').val(mar_comm.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#coms_formula_hidden').val(mar_comm.toFixed(2));
         ////////////////////////////  dealer commision value////////////
     }
 }
+$("body").on('keyup','.intiqal_given',function (){
+   var intiqal_given = $(this).val();
+   var intiqal_actual = $('#intiqal_a').val();
+   $('#intiqal_diff').val(intiqal_given-intiqal_actual);
+   $('#intiqal_diff_hiddens').val(intiqal_given-intiqal_actual);
+});
+
 
 

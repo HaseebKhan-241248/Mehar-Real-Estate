@@ -130,39 +130,40 @@ function getPlotMarla(val)
         }
     })
 }
-var row=1;
-$(document).on("click", "#add-row", function () {
-    var new_row = `
-      <tr id="row${row}">
-       <td>
-       <div class="col-md-12 input-group input-group-sm xs-mb-15">
-         <input name="attachments[]" type="file" class="form-control" />
-         </div>
-       </td>
-       <td>
-       <div class="col-md-12 input-group input-group-sm xs-mb-15">
-        <input name="comments[]" type="text" placeholder="Comment" class="form-control" />
-        </div>
-       </td>
-       <td>
-         <button class="delete-rowatt btn btn-danger btn-sm">
-            <i class="fa fa-trash  text-white"></i>
-         </button>
-       </td>
-      </tr>
-    `;
-
-    $('#test-body').append(new_row);
-    row++;
-    return false;
-});
-
-// Remove criterion
-$(document).on("click", ".delete-rowatt", function () {
-    //  alert("deleting row#"+row);
-    if(row>1) {
-        $(this).closest('tr').remove();
-        row--;
-    }
-    return false;
-});
+// var row= 1;
+// $(document).on("click", "#add-row", function () {
+//
+//     var new_row = `
+//       <tr id="row${row}">
+//        <td>
+//        <div class="col-md-12 input-group input-group-sm xs-mb-15">
+//          <input name="attachments[]" type="file" class="form-control" />
+//          </div>
+//        </td>
+//        <td>
+//        <div class="col-md-12 input-group input-group-sm xs-mb-15">
+//         <input name="comments[]" type="text" placeholder="Comment" class="form-control" />
+//         </div>
+//        </td>
+//        <td>
+//          <button class="delete-rowatt btn btn-danger btn-sm">
+//             <i class="fa fa-trash  text-white"></i>
+//          </button>
+//        </td>
+//       </tr>
+//     `;
+//
+//     $('#test-body').append(new_row);
+//     row++;
+//     return false;
+// });
+//
+// // Remove criterion
+// $(document).on("click", ".delete-rowatt", function () {
+//     //  alert("deleting row#"+row);
+//     if(row>1) {
+//         $(this).closest('tr').remove();
+//         row--;
+//     }
+//     return false;
+// });

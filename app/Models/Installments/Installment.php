@@ -46,10 +46,10 @@ class Installment extends Model
                 'amount_check'       => $value,
 //                'amount_paid'        => $value,
                 'description'        => $request->particular[$key],
-                'cheque_no'          => $request->check_no[$key],
+//                'cheque_no'          => $request->check_no[$key],
                 'date'               => $request->check_date[$key],
-                'cheque_bank'        => $request->check_issue[$key],
-                'party_name'         => $request->party_name[$key],
+//                'cheque_bank'        => $request->check_issue[$key],
+//                'party_name'         => $request->party_name[$key],
                 'type'               => 0,
                 'status'             => $status,
             ]);

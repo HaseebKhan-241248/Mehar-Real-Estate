@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+{{--@section('title','Dashboard')--}}
 @section('content')
     <div class="be-content">
         <div class="main-content container-fluid">
@@ -365,7 +366,7 @@
                 </div>
             </div>
             {{-- <div class="row">
-                
+
                 <div class="col-xs-12 col-md-6">
                     <div class="widget be-loading">
                         <div class="widget-head">
