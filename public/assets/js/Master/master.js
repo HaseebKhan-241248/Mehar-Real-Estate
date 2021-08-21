@@ -130,6 +130,29 @@ function getPlotMarla(val)
         }
     })
 }
+
+
+$("body").on('change','.project_id',function(){
+    let val = $(this).val();
+    $('#plots').html('');
+    $('#plots').append('');
+    $.ajax({
+        url:`${baseurl}/project_plots/${val}`,
+        method:'GET',
+        success: function (response) {
+            $('#plots').append('<option value="">Select One</option>');
+            $('#plots').append('<option value="All">All</option>');
+            response.data.map(function (data){
+                let  html = '<option value="'+ data.id +'">'+data.name+'</option>'
+                $('#plots').append(html);
+            });
+        },
+        error: function (error) {
+            console.log('error');
+            console.log(error);
+        }
+    })
+});
 // var row= 1;
 // $(document).on("click", "#add-row", function () {
 //

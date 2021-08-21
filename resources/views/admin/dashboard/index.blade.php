@@ -61,14 +61,24 @@
                                 <div class="dropdown">
                                     <span data-toggle="dropdown" class="icon mdi mdi-more-vert visible-xs-inline-block dropdown-toggle"></span>
                                     <ul role="menu" class="dropdown-menu">
-                                        <li><a href="#">Week</a></li>
-                                        <li><a href="#">Month</a></li>
-                                        <li><a href="#">Year</a></li>
+                                        <li>
+                                            <a href="#">Week</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Month</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Year</a>
+                                        </li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Today</a></li>
+                                        <li>
+                                            <a href="#">Today</a>
+                                        </li>
                                     </ul>
                                 </div>
-                                <span class="icon mdi mdi-chevron-down"></span><span class="icon toggle-loading mdi mdi-refresh-sync"></span><span class="icon mdi mdi-close"></span>
+                                <span class="icon mdi mdi-chevron-down"></span>
+                                <span class="icon toggle-loading mdi mdi-refresh-sync"></span>
+                                <span class="icon mdi mdi-close"></span>
                             </div>
                             <div class="button-toolbar hidden-xs">
                                 <div class="btn-group">
@@ -84,9 +94,15 @@
                         <div class="widget-chart-container">
                             <div class="widget-chart-info">
                                 <ul class="chart-legend-horizontal">
-                                    <li><span data-color="main-chart-color1"></span> Purchases</li>
-                                    <li><span data-color="main-chart-color2"></span> Plans</li>
-                                    <li><span data-color="main-chart-color3"></span> Services</li>
+                                    <li>
+                                        <span data-color="main-chart-color1"></span> Purchases
+                                    </li>
+                                    <li>
+                                        <span data-color="main-chart-color2"></span> Plans
+                                    </li>
+                                    <li>
+                                        <span data-color="main-chart-color3"></span> Services
+                                    </li>
                                 </ul>
                             </div>
                             <div class="widget-counter-group widget-counter-group-right">
@@ -117,7 +133,8 @@
                 <div class="col-md-6">
                     <div class="panel panel-default panel-table">
                         <div class="panel-heading">
-                            <div class="tools"><span class="icon mdi mdi-download"></span>
+                            <div class="tools">
+                                <span class="icon mdi mdi-download"></span>
                                 <span class="icon mdi mdi-more-vert"></span>
                             </div>
                             <div class="title">Lastest 5 Purchases</div>
@@ -201,45 +218,40 @@
                                 <span class="icon mdi mdi-download"></span>
                                 <span class="icon mdi mdi-more-vert"></span>
                             </div>
-                            <div class="title">Latest 5 Sales</div>
+                            <div class="title">Latest 5 Bookings</div>
                         </div>
                         <div class="panel-body table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th style="width:37%;">User</th>
-                                    <th style="width:36%;">Commit</th>
+                                    <th style="width:60%;">Customer</th>
+                                    <th style="">Agreed Price</th>
                                     <th>Date</th>
                                     <th class="actions"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="user-avatar">
-                                        <img src="assets/img/avatar6.png" alt="Avatar">Penelope Thornton
-                                    </td>
-                                    <td>Topbar dropdown style</td>
-                                    <td>Aug 16, 2016</td>
-                                    <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar4.png" alt="Avatar">Benji Harper</td>
-                                    <td>Left sidebar adjusments</td>
-                                    <td>Jul 15, 2016</td>
-                                    <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar5.png" alt="Avatar">Justine Myranda</td>
-                                    <td>Main structure markup</td>
-                                    <td>Jul 28, 2016</td>
-                                    <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="user-avatar"> <img src="assets/img/avatar3.png" alt="Avatar">Sherwood Clifford</td>
-                                    <td>Initial commit</td>
-                                    <td>Jun 30, 2016</td>
-                                    <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
-                                </tr>
+                                @foreach($latest_bookings as $latest_booking)
+                                    <tr>
+                                        <td class="user-avatar">
+                                            @if($latest_booking->Customer_Name)
+                                                @if($latest_booking->Customer_Name->image)
+                                                    <img src="{{ asset('') }}images/{{ $latest_booking->Customer_Name->image }}" alt="Avatar">
+                                                @else
+                                                    <img src="assets/img/avatar3.png" alt="Avatar">
+                                                @endif
+                                            @else
+                                                <img src="assets/img/avatar3.png" alt="Avatar">
+                                            @endif
+                                            @if($latest_booking->Customer_Name)
+                                                {{ $latest_booking->Customer_Name->name }}
+                                            @endif
+                                        </td>
+                                        <td>{{ number_format($latest_booking->agreed_price-$latest_booking->discount,2) }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($latest_booking->day)->format('d M Y') }}</td>
+                                        <td class="actions"><a href="#" class="icon"><i class="mdi mdi-github-alt"></i></a></td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

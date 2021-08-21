@@ -116,7 +116,7 @@
                                     <div class="col-md-2">
                                     </div>
                                 @else
-                                    <div class="col-md-2" style="display: flex;">
+                                    <div class="col-md-2" style="display: flex;margin-top: 12px;">
                                         <p class="customP">{{ $operations }}</p>
 
                                         <input type="checkbox" style="margin-left:5px;" class="customCheckbox" {{ in_array($operations,($db_array[$counter])->operations) ? "checked" : " "   }} permission_id="{{ $permission->id }}" operation="{{ $operations }}" value="{{ $operations }}" class="form-control" name="module[]" id="module{{ $permission->id }}">
@@ -144,7 +144,7 @@
                                                 <div style="margin-left: 20px;" class="col-md-2">
                                                 </div>
                                             @else
-                                                <div  style="margin-left: 20px;display:flex;" class="col-md-2">
+                                                <div  style="margin-left: 20px;display:flex;margin-top: 12px;" class="col-md-2">
                                                     <p class="customP2">{{ $operations }}</p>
                                                     <input type="checkbox" style="margin-left:5px;" class="customCheckbox" {{ in_array($operations,($db_array[$inner_counter])->operations) ? "checked" : " "   }} permission_id="{{ $submodule->id }}" operation="{{ $operations }}" value="{{ $operations }}" class="form-control" >
                                                 </div>

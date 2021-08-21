@@ -70,6 +70,7 @@ class Booking extends Model
         'intiqal_attachment',
         'partner_share',
         'on_account_of',
+        'payment_to_partner',
     ];
     public function Customer_Name()
     {
@@ -179,6 +180,7 @@ class Booking extends Model
                 'partner_id'               => $request->partner_id,
                 'partner_share'            => $request->partner_percent,
                 'on_account_of'            => $request->on_account_of,
+                'payment_to_partner'       => $request->payment_to_partner,
             ]);
         }
         else
@@ -230,6 +232,7 @@ class Booking extends Model
                 'partner_id'               => $request->partner_id,
                 'partner_share'            => $request->partner_percent,
                 'on_account_of'            => $request->on_account_of,
+                'payment_to_partner'       => $request->payment_to_partner,
             ]);
         }
     }

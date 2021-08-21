@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="row " >
                                     <div class="col-md-3 ">
-                                        <button class="btn btn-primary btn-sm ">Save</button>
+                                        <button class="btn btn-primary btn-sm btnsave">Save</button>
                                     </div>
                                 </div>
                             </form>
@@ -331,7 +331,9 @@
                                                 <td style="padding:1px;"></td>
                                                 <td style="padding:1px;"></td>
                                                 <th class="summary text-center" style="padding:1px;">Remaining Amount </th>
-                                                <th class="amount text-center" style="padding:1px;">{{ number_format(($booking->agreed_price-$booking->discount-$booking->received)-$total_installment_received,2) }}</th>
+                                                <th class="amount text-center" style="padding:1px;">{{ number_format(($booking->agreed_price-$booking->discount-$booking->received)-$total_installment_received,2) }}
+                                                    <input type="hidden" id="checking" value="{{ ($booking->agreed_price-$booking->discount-$booking->received)-$total_installment_received }}">
+                                                </th>
                                                 <td style="padding:1px;"></td>
                                             </tr>
                                             </tbody>
@@ -353,6 +355,14 @@
             // App.init();
             App.dataTables();
             App.formElements();
+
+            let amount = $('#checking').val();
+
+            if(amount=="0" || amount==0)
+            {
+                $(".btnsave").attr("disabled", true);
+                // $('.btnsave').disabled();
+            }
         });
         function validateForm()
         {

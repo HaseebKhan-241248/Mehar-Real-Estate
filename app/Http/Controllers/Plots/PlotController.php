@@ -35,7 +35,7 @@ class PlotController extends Controller
             $data['sectors']  = Sector::where('project_id',Auth::user()->project_id)->get();
             $data['projects'] = Project::where('id',Auth::user()->project_id)->get();
         }
-        $data['counter']  = 1;        
+        $data['counter']  = 1;
         $data['sizes']    = Marla::all();
         return view('admin.inventory_management.plots.plot',$data);
     }
@@ -47,6 +47,14 @@ class PlotController extends Controller
     public function get_plots($plot_id)
     {
         $plots = Plot::where('block_id','=',$plot_id)->where('status','=',1)->get();
+        return collect([
+            'status' => true,
+            'data'   => $plots
+        ]);
+    }
+    public function project_plots($project_id)
+    {
+        $plots = Plot::where('project_id','=',$project_id)->where('status','=',1)->get();
         return collect([
             'status' => true,
             'data'   => $plots

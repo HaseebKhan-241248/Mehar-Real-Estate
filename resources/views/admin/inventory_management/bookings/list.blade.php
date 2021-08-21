@@ -32,7 +32,6 @@
 
                 <div class="col-sm-12">
                     <div class="panel panel-default panel-border-color panel-border-color-primary">
-                        @if((Auth::user()->role)=="Super Admin")
                             <div class="panel-heading panel-heading-divider">
                                 <div class="row">
                                     <div class="col-md-3">
@@ -67,11 +66,7 @@
                                     </div>
                                 </div>
                             </div>
-                        @else
-                            <div class="panel-heading panel-heading-divider">Booking's List
-                                <span class="panel-subtitle"></span>
-                            </div>
-                        @endif
+
                         <div class="panel-body">
                             <div class="p-2">
                                 <center>
@@ -90,6 +85,7 @@
                                             <th>Agreed Price</th>
                                             <th>Received Amount</th>
                                             <th>Outstanding Recovery Till Date</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -120,7 +116,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{$booking->customer_contact}}</td>
-                                                    <td>{{ number_format($booking->agreed_price,2) }}</td>
+                                                    <td>{{ number_format($booking->agreed_price-$booking->discount,2) }}</td>
                                                     <td>{{number_format($booking->received,2)}}</td>
                                                     @php
                                                         $outstandings = \App\Models\Installments\Installment::where('booking_id',$booking->id)->where('installment_amount','>','0')->where('description','!=','Booking')->where('date','<',date('Y-m-d'))->get();
@@ -132,6 +128,13 @@
                                                     @endphp
                                                     <td>
                                                         {{ number_format($total_outstanding,2) }}
+                                                    </td>
+                                                    <td>
+                                                        @if($booking->status==1)
+                                                            <font style="color: green">Approved</font>
+                                                        @else
+                                                            <font style="color: red;">Pending</font>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <div class="input-group-btn">
@@ -148,14 +151,15 @@
                                                                             <i class="fa fa-gavel"></i> Terms & Condition
                                                                         </a>
                                                                     </li>
+                                                                    <li>
+                                                                        <a  target="_blank" href="{{ route('edit.booking',[$booking->id]) }}">
+                                                                            <i class="fa fa-edit"></i> Edit
+                                                                        </a>
+                                                                    </li>
                                                                     @if($booking->status==1)
 
                                                                     @else
-                                                                        <li>
-                                                                            <a  target="_blank" href="{{ route('edit.booking',[$booking->id]) }}">
-                                                                                <i class="fa fa-edit"></i> Edit
-                                                                            </a>
-                                                                        </li>
+
                                                                         <li>
                                                                             <a   href="{{ route('delete.booking',[$booking->id]) }}">
                                                                                 <i class="fa fa-trash"></i> Delete
@@ -357,6 +361,7 @@
                                             <th>Agreed Price</th>
                                             <th>Received Amount</th>
                                             <th>Outstanding Recovery Till Date</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </table>
@@ -408,6 +413,7 @@
                     $('#detail').html(data.result);
                     $('#loading').css('display','none');
                 }
+                $('#table1').DataTable();
             });
         });
     </script>

@@ -86,6 +86,7 @@ class Partner extends Model
                 'status'           => "Active",
                 'fixed'            => 1,
                 'type'             => "Partner",
+                'project_id'=> $request->project_id,
             ]);
 
             parent::where('id',$p_id)->update(['account_id'=>$acc->id]);

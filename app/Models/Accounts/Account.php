@@ -32,7 +32,7 @@ class Account extends Model
         return $this->hasOne(Project::class,'id','project_id');
     }
 
-    public static function savePlotAccount($plotid,$name)
+    public static function savePlotAccount($plotid,$name,$pro_id)
     {
        return parent::create([
             'account_name'     => $plotid."-".$name,
@@ -42,6 +42,7 @@ class Account extends Model
             'day'              => date('Y-m-d'),
             'type'             => "Plot",
             'status'           => "Active",
+            'project_id'       => $pro_id,
         ]);
     }
 }

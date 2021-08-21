@@ -84,6 +84,7 @@ class Dealer extends Model
                 'status'           => "Active",
                 'fixed'            => 1,
                 'type'             => "Dealer",
+                'project_id'       => $request->project_id,
 
             ]);
 

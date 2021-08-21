@@ -91,6 +91,7 @@ class BookingController extends Controller
         {
             Ledger::saveDealerCommission($request,$booking->id);
         }
+
         if ($request->attachments)
         {
             Bookgingattachment::saveAttachments($request,$booking->id);
@@ -209,10 +210,10 @@ class BookingController extends Controller
         {
             Ledger::saveDealerCommission($request,$request->booking_id);
         }
-//        if ($request->attachments)
-//        {
+        if ($request->attachments || $request->old_attachments)
+        {
         Bookgingattachment::UpdateAttachments($request,$request->booking_id);
-//        }
+        }
         return redirect()->route('booking.list')->withstatus("Booking Updated Successfully");
     }
     public function  delete_booking($id)

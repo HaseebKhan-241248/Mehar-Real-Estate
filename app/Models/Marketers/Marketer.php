@@ -85,6 +85,7 @@ class Marketer extends Model
                 'status'           => "Active",
                 'fixed'            => 1,
                 'type'             => "Marketer",
+                'project_id'       => $request->project_id,
             ]);
 
             parent::where('id',$m_id)->update(['account_id'=>$acc->id]);

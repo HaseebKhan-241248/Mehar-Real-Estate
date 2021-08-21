@@ -167,8 +167,8 @@ class AdminController extends Controller
     public function update_permission()
     {
         $new_permission = [
-            'name'        => 'General Journal',
-            'id'          => '33',
+            'name'        => 'General Ledger',
+            'id'          => '34',
             'parent_id'   => '32',
             'operations'  => [],
         ];

@@ -94,7 +94,7 @@ class Plot extends Model
                 'status'      => 1,
             ]);
             ////// creating a account of plot /////////////////
-            $account = Account::savePlotAccount($plot->id,$request->name);
+            $account = Account::savePlotAccount($plot->id,$request->name,$request->project_id);
             parent::where('id',$plot->id)->update(['account_id' => $account->id]);
             ////// update the plot table iserting account_id///
             return [
@@ -103,6 +103,5 @@ class Plot extends Model
             ];
         }
         // }
-
     }
 }

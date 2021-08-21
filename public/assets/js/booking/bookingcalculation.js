@@ -18,7 +18,7 @@ function calc()
     var partner_per   = $('#partner_percent').val();
     /// amount paid to partner
 
-    var rcvdamount    = $('#partner_amount').val();
+
     var percentage    = partner_per/100;
 
     if (marla==null || marla=="")
@@ -48,16 +48,33 @@ function calc()
 
         /////////////////// partener amount A//////////////////
 
+
         var rcvdamount= parseFloat(agree_price) * parseFloat(percentage);
+
+
+
         $('#partner_amount').val(rcvdamount.toFixed(2));
+
+        var upt_rcvdamount    = $('#partner_amount').val();
+
         var partnerA    = parseFloat(receieved_amt) * parseFloat(percentage);
 
         $('#partner_amount_a').val(partnerA.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#partner_amount_a_hidden').val(partnerA.toFixed(2));
 
         ///////////////// difference of partner amount////////////////
-
-        var diff_partner  = parseFloat(rcvdamount)-partnerA;
+        // alert(receieved_amt);
+        let payment_to_partner = $('#payment_to_partner').val();
+        var diff_partner       = partnerA - parseFloat(receieved_amt);
+        if(diff_partner>=0)
+        {
+            diff_partner = diff_partner - parseFloat(payment_to_partner);
+        }
+        else
+        {
+            diff_partner = diff_partner + parseFloat(payment_to_partner);
+        }
+        console.log(diff_partner);
         $('#equity_difference').val(diff_partner.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
         $('#equity_difference_hidden').val(diff_partner.toFixed(2));
 
@@ -96,7 +113,7 @@ function calc()
         var marketer_percenage = parseFloat(marketer_comm)/100;
         var m_comm_val         = parseFloat(agree_price) * marketer_percenage;
 
-        $('#marketer_commision_value').val(m_comm_val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $('#marketer_commision_value').val(m_comm_val.toFixed(2));
         $('#marketer_commision_value_hidden').val(m_comm_val.toFixed(2));
 
         /////////////////// calculate dealer commision////////////////
@@ -104,7 +121,7 @@ function calc()
         var dealer_percenage = parseFloat(dealer_comm)/100;
         var d_comm_val       = parseFloat(agree_price) * dealer_percenage;
 
-        $('#dealer_commision_value').val(d_comm_val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+        $('#dealer_commision_value').val(d_comm_val.toFixed(2));
         $('#dealer_commision_value_hidden').val(d_comm_val.toFixed(2));
 
         ///////////////////////////  marketer commision value////////////
@@ -121,6 +138,7 @@ function calc()
         ////////////////////////////  dealer commision value////////////
     }
 }
+
 $("body").on('keyup','.intiqal_given',function (){
    var intiqal_given = $(this).val();
    var intiqal_actual = $('#intiqal_a').val();
@@ -128,5 +146,36 @@ $("body").on('keyup','.intiqal_given',function (){
    $('#intiqal_diff_hiddens').val(intiqal_given-intiqal_actual);
 });
 
+$("body").on('keyup','.partner_amount',function(){
+    let amount       = $(this).val();
+    // var partner_per  = $('#partner_percent').val();
+    // var percentage   = partner_per/100;
+    let agreed_price = $('#agreed_price').val();
+    let discount     = $('#discount').val();
+    agreed_price     = agreed_price-discount;
+    percentage       = (amount/agreed_price)*100;
+    $('#partner_percent').val(percentage.toFixed(2));
+});
+
+$("body").on('keyup','.marketer_commision_value',function(){
+    let amount             = $(this).val();
+    let agreed_price       = $('#agreed_price').val();
+    let discount           = $('#discount').val();
+    agreed_price           = agreed_price-discount;
+    var marketer_comm      = $('#marketer_commision_per').val();
+    percentage             = (amount/agreed_price)*100;
+    // alert(percentage);
+    $('#marketer_commision_per').val(percentage.toFixed(2));
+});
 
 
+$("body").on('keyup','.dealer_commision_value',function(){
+    let amount             = $(this).val();
+    let agreed_price       = $('#agreed_price').val();
+    let discount           = $('#discount').val();
+    agreed_price           = agreed_price-discount;
+    var marketer_comm      = $('#dealer_commision_per').val();
+    percentage             = (amount/agreed_price)*100;
+    // alert(percentage);
+    $('#dealer_commision_per').val(percentage.toFixed(2));
+});

@@ -381,33 +381,33 @@
                                             <tbody id="rowTable">
                                             @php $counter2=0; @endphp
                                             @foreach($installments as $installment)
-                                            <tr Cdate="{{ $installment->date }}">
-                                                <td class="text-center">
-                                                    @if($counter2==0)
-                                                    @else
-                                                        {{ $counter2 }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                        <input readonly type="number" class="form-control amount_before_vat "   name="amount[]" value="{{ $installment->installment_amount }}" />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                        <input type="text"  name="particular[]" readonly class="form-control particulars"  value="{{ $installment->description }}" />
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                        @if($installment->description=="Possession Amount")
-                                                            <input     type="date" value="{{ $installment->date }}" class="form-control customdate" name="check_date[]" />
+                                                <tr Cdate="{{ $installment->date }}">
+                                                    <td class="text-center">
+                                                        @if($counter2==0)
                                                         @else
-                                                            <input  readonly   type="date" value="{{ $installment->date }}" class="form-control customdate" name="check_date[]" />
+                                                            {{ $counter2 }}
                                                         @endif
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-md-12 input-group input-group-sm xs-mb-15">
+                                                            <input readonly type="number" class="form-control amount_before_vat "   name="amount[]" value="{{ $installment->installment_amount }}" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-md-12 input-group input-group-sm xs-mb-15">
+                                                            <input type="text"  name="particular[]" readonly class="form-control particulars"  value="{{ $installment->description }}" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-md-12 input-group input-group-sm xs-mb-15">
+                                                            @if($installment->description=="Possession Amount")
+                                                                <input     type="date" value="{{ $installment->date }}" class="form-control customdate" name="check_date[]" />
+                                                            @else
+                                                                <input  readonly   type="date" value="{{ $installment->date }}" class="form-control customdate" name="check_date[]" />
+                                                            @endif
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                                 @php $counter2++; @endphp
                                             @endforeach
                                             </tbody>
@@ -431,7 +431,7 @@
                                             <input type="hidden" id="partner_id" value="{{ $booking->partner_id }}" name="partner_id">
                                             <label for="partner_amount" class="text-primary">Partner Amount</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                <input type="" onkeyup="calc()" placeholder="0" value="{{ $booking->partner_amount }}" class="form-control" id="partner_amount" name="partner_amount">
+                                                <input type=""  placeholder="0" value="{{ $booking->partner_amount }}" class="form-control partner_amount" id="partner_amount" name="partner_amount">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -444,6 +444,13 @@
 
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="payment_to_partner" class="text-primary">Payment to Partner</label>
+                                            <div class="col-md-12 input-group input-group-sm xs-mb-15">
+                                                <input type="number" onkeyup="calc()" placeholder="0" name="payment_to_partner" id="payment_to_partner"
+                                                       class="form-control" value="{{ $booking->payment_to_partner }}">
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="equity_difference" class="text-primary">Equity (Diff)</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
@@ -506,7 +513,7 @@
                                             <label for="" class="text-primary">Intiqal Attachment</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                 <input type="file"  class="form-control" name="intiqal_attachment">
-{{--                                                {{ dd($booking->Intiqal) }}--}}
+                                                {{--                                                {{ dd($booking->Intiqal) }}--}}
                                                 <input type="hidden" @if($booking->Intiqal) value="{{ $booking->Intiqal->intiqal_attachment }}"  @endif class="form-control" name="old_intiqal_attachment">
                                             </div>
                                         </div>
@@ -541,11 +548,11 @@
                                                     Value</label>
                                                 <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                     <input type="hidden" class="form-control"
-                                                           id="marketer_commision_value_hidden" name="marketer_commision_value"
+                                                           id="marketer_commision_value_hidden" name=""
                                                            placeholder="0" value="{{ $booking->marketer_commision_value }}">
-                                                    <input type="text" readonly class="form-control"
-                                                           id="marketer_commision_value" name="" placeholder="0"
-                                                           value="{{ number_format($booking->marketer_commision_value) }}">
+                                                    <input type="text"  class="form-control marketer_commision_value"
+                                                           id="marketer_commision_value" name="marketer_commision_value" placeholder="0"
+                                                           value="{{ $booking->marketer_commision_value }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -608,15 +615,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="marketer_commision_value" class="text-primary">Marketer Commision
-                                                        Value</label>
+                                                    <label for="marketer_commision_value" class="text-primary">Marketer Commision Value</label>
                                                     <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                         <input type="hidden" class="form-control"
                                                                id="marketer_commision_value_hidden" name="marketer_commision_value"
                                                                placeholder="0" value="{{ $booking->marketer_commision_value }}">
-                                                        <input type="text" readonly class="form-control"
+                                                        <input type="text"  class="form-control"
                                                                id="marketer_commision_value" name="" placeholder="0"
-                                                               value="{{ number_format($booking->marketer_commision_value) }}">
+                                                               value="{{ $booking->marketer_commision_value }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -680,15 +686,14 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="dealer_commision_value" class="text-primary">Dealer Commission
-                                                    Value</label>
+                                                <label for="dealer_commision_value" class="text-primary">Dealer Commission Value</label>
                                                 <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                    <input type="hidden" class="form-control" name="dealer_commision_value"
+                                                    <input type="hidden" class="form-control" name=""
                                                            id="dealer_commision_value_hidden" placeholder="0"
                                                            value="{{ $booking->dealer_commision_value }}">
-                                                    <input type="text" class="form-control" readonly name=""
+                                                    <input type="text" class="form-control dealer_commision_value"  name="dealer_commision_value"
                                                            id="dealer_commision_value" placeholder="0"
-                                                           value="{{ number_format($booking->dealer_commision_value) }}">
+                                                           value="{{ $booking->dealer_commision_value }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -746,15 +751,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="dealer_commision_value" class="text-primary">Dealer Commission
-                                                        Value</label>
+                                                    <label for="dealer_commision_value" class="text-primary">Dealer Commission Value</label>
                                                     <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                        <input type="hidden" class="form-control" name="dealer_commision_value"
+                                                        <input type="hidden" class="form-control" name=""
                                                                id="dealer_commision_value_hidden" placeholder="0"
                                                                value="{{ $booking->dealer_commision_value }}">
-                                                        <input type="text" class="form-control" readonly name=""
+                                                        <input type="text" class="form-control dealer_commision_value"  name=""
                                                                id="dealer_commision_value" placeholder="0"
-                                                               value="{{ number_format($booking->dealer_commision_value) }}">
+                                                               value="{{ $booking->dealer_commision_value }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -810,16 +814,16 @@
                                                         @php $counter=0; @endphp
                                                         @foreach($attachments as $attachment)
                                                             @php
-                                                            if($attachment->attachments)
-                                                                {
-                                                                $file = explode("/",$attachment->attachments);
-                                                                }
-                                                                else
-                                                                {
-                                                                    $file[3]="Not Found";
-                                                                }
+                                                                if($attachment->attachments)
+                                                                    {
+                                                                    $file = explode("/",$attachment->attachments);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        $file[3]="Not Found";
+                                                                    }
 
-                                                                @endphp
+                                                            @endphp
                                                             <tr id="row{{ $counter }}">
                                                                 <td>
                                                                     <div class="col-md-12 input-group input-group-sm xs-mb-15">
@@ -859,7 +863,7 @@
                                     @if(\Auth::user()->role=='Super Admin')
                                         <button type="submit" name="" class="btn btn-primary ">Update</button>
                                     @else
-                                        @can('Add New Booking','Update')
+                                        @can('Manage Booking','Update')
                                             <button type="submit" name="" class="btn btn-primary ">Update</button>
                                         @endcan
                                     @endif

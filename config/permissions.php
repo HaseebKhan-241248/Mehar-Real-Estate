@@ -229,6 +229,13 @@ return [
         'operations'  => ['','Generate Report','',''],
     ],
 
+    [
+        'name'        => 'General Ledger',
+        'id'          => '34',
+        'parent_id'   => '32',
+        'operations'  => ['','Generate Report','',''],
+    ],
+
 
 ]
 

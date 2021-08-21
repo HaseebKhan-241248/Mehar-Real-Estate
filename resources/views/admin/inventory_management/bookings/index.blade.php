@@ -385,8 +385,8 @@
                                             <input type="hidden" id="partner_id" name="partner_id">
                                             <label for="partner_amount" class="text-primary">Partner Amount</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                <input type="" onkeyup="calc()" placeholder="0" value="0"
-                                                       class="form-control" id="partner_amount" name="partner_amount">
+                                                <input type=""  placeholder="0" value="0"
+                                                       class="form-control partner_amount" id="partner_amount" name="partner_amount">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -403,6 +403,13 @@
 
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="payment_to_partner" class="text-primary">Payment to Partner</label>
+                                            <div class="col-md-12 input-group input-group-sm xs-mb-15">
+                                                <input type="number" onkeyup="calc()" placeholder="0" name="payment_to_partner" id="payment_to_partner"
+                                                       class="form-control" value="0">
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <label for="equity_difference" class="text-primary">Equity (Diff)</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
@@ -494,14 +501,13 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="marketer_commision_value" class="text-primary">Marketer Commision
-                                                    Value</label>
+                                                <label for="marketer_commision_value" class="text-primary">Marketer Commision Value</label>
                                                 <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                     <input type="hidden" class="form-control"
-                                                           id="marketer_commision_value_hidden" name="marketer_commision_value"
+                                                           id="marketer_commision_value_hidden" name=""
                                                            placeholder="0" value="{{ old('marketer_commision_value') }}">
-                                                    <input type="text" readonly class="form-control"
-                                                           id="marketer_commision_value" name="" placeholder="0"
+                                                    <input type="text"  class="form-control marketer_commision_value"
+                                                           id="marketer_commision_value" name="marketer_commision_value" placeholder="0"
                                                            value="{{ old('marketer_commision_value') }}">
                                                 </div>
                                             </div>
@@ -569,10 +575,10 @@
                                                         Value</label>
                                                     <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                         <input type="hidden" class="form-control"
-                                                               id="marketer_commision_value_hidden" name="marketer_commision_value"
+                                                               id="marketer_commision_value_hidden" name=""
                                                                placeholder="0" value="{{ old('marketer_commision_value') }}">
-                                                        <input type="text" readonly class="form-control"
-                                                               id="marketer_commision_value" name="" placeholder="0"
+                                                        <input type="text"  class="form-control marketer_commision_value"
+                                                               id="marketer_commision_value" name="marketer_commision_value" placeholder="0"
                                                                value="{{ old('marketer_commision_value') }}">
                                                     </div>
                                                 </div>
@@ -637,15 +643,10 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="dealer_commision_value" class="text-primary">Dealer Commission
-                                                    Value</label>
+                                                <label for="dealer_commision_value" class="text-primary">Dealer Commission Value</label>
                                                 <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                    <input type="hidden" class="form-control" name="dealer_commision_value"
-                                                           id="dealer_commision_value_hidden" placeholder="0"
-                                                           value="{{ old('dealer_commision_value') }}">
-                                                    <input type="text" class="form-control" readonly name=""
-                                                           id="dealer_commision_value" placeholder="0"
-                                                           value="{{ old('dealer_commision_value') }}">
+                                                    <input type="hidden" class="form-control" name="" id="dealer_commision_value_hidden" placeholder="0" value="{{ old('dealer_commision_value') }}">
+                                                    <input type="text" class="form-control dealer_commision_value"  name="dealer_commision_value" id="dealer_commision_value" placeholder="0" value="{{ old('dealer_commision_value') }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -703,13 +704,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label for="dealer_commision_value" class="text-primary">Dealer Commission
-                                                        Value</label>
+                                                    <label for="dealer_commision_value" class="text-primary">Dealer Commission Value</label>
                                                     <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                        <input type="hidden" class="form-control" name="dealer_commision_value"
+                                                        <input type="hidden" class="form-control" name=""
                                                                id="dealer_commision_value_hidden" placeholder="0"
                                                                value="{{ old('dealer_commision_value') }}">
-                                                        <input type="text" class="form-control" readonly name=""
+                                                        <input type="text" class="form-control dealer_commision_value"  name="dealer_commision_value"
                                                                id="dealer_commision_value" placeholder="0"
                                                                value="{{ old('dealer_commision_value') }}">
                                                     </div>
@@ -945,6 +945,8 @@
             }
             return false;
         });
+
+
     </script>
     <script src="{{ asset('/assets/js/booking/bookingcalculation.js') }}"></script>
     <script src="{{ asset('/assets/js/Master/master.js') }}"></script>

@@ -851,6 +851,8 @@ function ApplyPlans() {
             tamount += parseInt($(this).val());
         });
         let agreed = $('#agreed_price').val();
+        let discount = $('#discount').val();
+        agreed = agreed -discount;
         if (agreed - tamount == 0) {
             $('#Prow').remove();
         }

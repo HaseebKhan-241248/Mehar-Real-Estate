@@ -29,7 +29,6 @@ class VoucherController extends Controller
             $data['accounts'] = Account::where('project_id',Auth::user()->project_id)->get();
         }
         $voucher = Voucher::where('type','Journal')->max('voucher_no');
-//        dd($voucher);
         if($voucher)
         {
             $data['voucher_no'] = $voucher+1;
@@ -50,7 +49,6 @@ class VoucherController extends Controller
             'debit'       => 'required',
             'credit'      => 'required',
         ]);
-//        dd($request->all());
         $voucher  = Voucher::saveJournalVoucher($request);
         $response = Ledger::saveJournalVoucherEntry($request,$voucher->id);
         return redirect()->route('journal.voucher')->withstatus($response['message']);
@@ -87,7 +85,6 @@ class VoucherController extends Controller
 
     public function bank_receipt_voucherr()
     {
-//        dd("f");
         $data['vouchers'] = Voucher::where('type',"Bank Receipt")->get();
         $data['counter']  = 1;
         return view('admin.vouchers.bank_receipt_vouchers.list',$data);

@@ -43,8 +43,8 @@ class Bookgingattachment extends Model
 //dd("d");
         parent::where('booking_id',$bookingId)->delete();
         $arr = [];
-
-        if($request->comments)
+//dd(isset($request->comments));
+        if(isset($request->comments))
         {
             foreach ($request->comments as $key => $comment) {
                 $bookingAttachment = parent::create([

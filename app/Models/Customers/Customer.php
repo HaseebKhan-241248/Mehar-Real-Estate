@@ -119,6 +119,7 @@ class Customer extends Model
                 'status'           => "Active",
                 'fixed'            => 1,
                 'type'             => "Customer",
+                'project_id'       => $request->project_id,
             ]);
 
             parent::where('id',$c_id)->update(['account_id'=>$acc->id]);

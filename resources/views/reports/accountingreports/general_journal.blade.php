@@ -87,11 +87,9 @@
                                                     <th class="text-center test1" style="padding:1px;">Account Title and Description</th>
                                                     <th class="text-center test1" style="padding:1px;">Debit</th>
                                                     <th class="text-center test1" style="padding:1px;">Credit</th>
-
                                                 </tr>
                                                 </thead>
-                                                <tbody id="detail">
-                                                </tbody>
+                                                <tbody id="detail"></tbody>
                                             </table>
                                         </div>
                                     </div>

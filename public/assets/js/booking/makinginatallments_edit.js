@@ -719,6 +719,8 @@ function ApplyPlans() {
             tamount += parseInt($(this).val());
         });
         let agreed = $('#agreed_price').val();
+        let discount = $('#discount').val();
+        agreed = agreed-discount;
         if (agreed - tamount == 0) {
             $('#Prow').remove();
         }
@@ -731,3 +733,25 @@ function ApplyPlans() {
         $('#amount').val(agreed - tamount-r);
     })
 }
+
+
+// $("body").on('keyup','.partner_amount',function(){
+//     let amount       = $(this).val();
+//     // var partner_per  = $('#partner_percent').val();
+//     // var percentage   = partner_per/100;
+//     let agreed_price = $('#agreed_price').val();
+//     let discount     = $('#discount').val();
+//     agreed_price     = agreed_price-discount;
+//     percentage       = (amount/agreed_price)*100;
+//     $('#partner_percent').val(percentage.toFixed(2));
+// });
+//
+// $("body").on('keyup','.marketer_commision_value',function(){
+//     let amount             = $(this).val();
+//     let agreed_price       = $('#agreed_price').val();
+//     let discount           = $('#discount').val();
+//     agreed_price           = agreed_price-discount;
+//     var marketer_comm      = $('#marketer_commision_per').val();
+//     percentage             = (amount/agreed_price)*100;
+//     $('#marketer_commision_per').val(percentage.toFixed(2));
+// });

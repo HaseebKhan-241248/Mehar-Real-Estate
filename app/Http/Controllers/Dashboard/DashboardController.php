@@ -13,11 +13,13 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        
+
         if(Auth::user()->role=="Super Admin")
         {
             $data['customers'] = Customer::all()->count();
-            $data['bookings']  = Booking::all()->count();    
+            $data['bookings']  = Booking::all()->count();
+            $data['latest_bookings'] = Booking::orderBy('id', 'desc')->take(5)->get();
+//            dd($data['latest_bookings']);
         }
         else
             {
@@ -25,10 +27,10 @@ class DashboardController extends Controller
                 {
                     return redirect()->route('profile.page',[ Auth::User()->id ]);
                 }
-               
+
                     $data['customers'] = Customer::where('project_id',Auth::user()->project_id)->count();
                     $data['bookings']  = Booking::where('project_id',Auth::user()->project_id)->count();
-            }            
+            }
         return view('admin.dashboard.index',$data);
     }
 }

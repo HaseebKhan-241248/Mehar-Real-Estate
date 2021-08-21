@@ -84,10 +84,10 @@
                                                     <a href="{{ route('cash.voucher') }}">Cash Voucher</a>
                                                 </li>
                                             @endcan
-                                                @can('Debit Voucher','Read')
-                                                    <li class="{{ (request()->is('debit-voucher')) || (request()->is('create-debit-voucher')) ? 'active' : '' }}">
-                                                        <a href="{{ route('debit.voucher') }}">Debit Voucher</a>
-                                                    </li>
+                                            @can('Debit Voucher','Read')
+                                                <li class="{{ (request()->is('debit-voucher')) || (request()->is('create-debit-voucher')) ? 'active' : '' }}">
+                                                    <a href="{{ route('debit.voucher') }}">Debit Voucher</a>
+                                                </li>
                                             @endcan
                                         </ul>
                                     </li>
@@ -447,22 +447,42 @@
                                 </li>
                             @else
                                 @can('Accounting Reports','Read')
-                                    <li class="divider customDivider">Accounting Reports</li>
-                                    @can('General Journal','Generate Report')
-                                        <li class="{{ (request()->is('general-journal-entries')) || (request()->is('marla-list')) ? 'active' : '' }} parent">
-                                            <a href="#">&nbsp
-                                                <i class="mdi mdi-refresh-alt"></i >
-                                                <span> &nbsp&nbsp Accounting Reports</span>
-                                            </a>
-                                            <ul class="sub-menu">
+                                    <li class="divider customDivider"> Reports</li>
+
+                                    <li class="{{ (request()->is('general-journal-entries')) || (request()->is('marla-list')) ? 'active' : '' }} parent">
+                                        <a href="#">&nbsp
+                                            <i class="mdi mdi-refresh-alt"></i >
+                                            <span> &nbsp&nbsp Accounting Reports</span>
+                                        </a>
+                                        <ul class="sub-menu">
+                                            @can('General Journal','Generate Report')
                                                 <li class="{{ (request()->is('general-journal-entries')) ? 'active' : '' }}">
                                                     <a href="{{ route('general.journal') }}">General Joutnal</a>
                                                 </li>
-                                            </ul>
-                                        </li>
-                                    @endcan
+                                            @endcan
+                                            @can('General Ledger','Generate Report')
+                                                <li class="{{ (request()->is('general-ledgers')) ? 'active' : '' }}">
+                                                    <a href="{{ route('general.ledger') }}">General Ledger</a>
+                                                </li>
+                                            @endcan
+                                        </ul>
+                                    </li>
+
                                 @endcan
                             @endif
+
+
+                            <li class="{{ (request()->is('total-receivable')) || (request()->is('total-pending')) ? 'active' : '' }} parent">
+                                <a href="#">&nbsp
+                                    <i class="mdi mdi-attachment-alt"></i >
+                                    <span> &nbsp&nbsp General Reports</span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="{{ (request()->is('total-receivable')) ? 'active' : '' }}">
+                                        <a href="{{ route('admin.totalreceivable') }}">Total Receiveable</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>

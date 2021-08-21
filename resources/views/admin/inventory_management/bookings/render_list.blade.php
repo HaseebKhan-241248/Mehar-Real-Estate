@@ -36,6 +36,13 @@
             {{ number_format($total_outstanding,2) }}
         </td>
         <td>
+            @if($booking->status==1)
+                <font style="color: green">Approved</font>
+            @else
+                <font style="color: red;">Pending</font>
+            @endif
+        </td>
+        <td>
             <div class="input-group-btn">
                 <button type="button" data-toggle="dropdown"
                         class="btn btn-xs btn-primary dropdown-toggle"

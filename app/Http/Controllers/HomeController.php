@@ -32,7 +32,9 @@ class HomeController extends Controller
         if(FacadesAuth::user()->role=="Super Admin")
         {
             $data['customers'] = Customer::all()->count();
-            $data['bookings']  = Booking::all()->count(); 
+            $data['bookings']  = Booking::all()->count();
+            $data['latest_bookings'] = Booking::orderBy('id', 'desc')->take(5)->get();
+//            dd($data['latest_bookings']);
         }
         else
             {
@@ -43,7 +45,7 @@ class HomeController extends Controller
                     $data['customers'] = Customer::where('project_id',FacadesAuth::user()->project_id)->count();
                     $data['bookings']  = Booking::where('project_id',FacadesAuth::user()->project_id)->count();
             }
-        
+
         return view('admin.dashboard.index',$data);
     }
 }

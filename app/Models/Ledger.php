@@ -95,7 +95,7 @@ class Ledger extends Model
             'booking_id' => $booking_id,
             'plot_id'    => $request->plot_id,
             'day'        => $request->start_date,
-            'debit'      => $request->agreed_price,
+            'debit'      => $request->agreed_price-$request->discount,
             'credit'     => 0,
             'remarks'    => "Booking",
             'type'       => "Booking",
@@ -111,7 +111,7 @@ class Ledger extends Model
                 'plot_id'    => $request->plot_id,
                 'day'        => $request->start_date,
                 'debit'      => 0,
-                'credit'     => $request->agreed_price,
+                'credit'     => $request->agreed_price-$request->discount,
                 'remarks'    => "Booking",
                 'type'       => "Booking",
                 'status'     => 0,
@@ -235,6 +235,8 @@ class Ledger extends Model
                 'user_id'    => Auth::user()->id,
             ]);
         }
+
+
     }
 
     public static function ReceiptEntry($request)
@@ -321,6 +323,35 @@ class Ledger extends Model
                 'remarks'    => "Payable to  Partner",
                 'type'       => "Partner",
                 'status'     => 0,
+                'user_id'    => Auth::user()->id,
+            ]);
+        }
+
+        if($request->payment_to_partner>0)
+        {
+            $cash_in_hand = Account::where('type2','=','cashinhand')->where('project_id',$request->project_id)->first();
+            parent::create([
+                'account_id' => $partnerid->account_id,
+                'booking_id' => $booking_id,
+                'plot_id'    => $request->plot_id,
+                'day'        => $request->start_date,
+                'debit'      => 0,
+                'credit'     => $request->payment_to_partner,
+                'remarks'    => "Paid to Partner",
+                'type'       => "Booking",
+                'status'     => 1,
+                'user_id'    => Auth::user()->id,
+            ]);
+            parent::create([
+                'account_id'  => $cash_in_hand->id,
+                'booking_id' => $booking_id,
+                'plot_id'    => $request->plot_id,
+                'day'        => $request->start_date,
+                'debit'      => $request->payment_to_partner,
+                'credit'     => 0,
+                'remarks'    => "Paid to Parner",
+                'type'       => "Booking",
+                'status'     => 1,
                 'user_id'    => Auth::user()->id,
             ]);
         }
