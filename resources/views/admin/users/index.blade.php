@@ -264,7 +264,6 @@
                 }
                 else
                 {
-
                     toastr.success("User Saved Successfully!");
                     location.reload();
                 }

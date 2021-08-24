@@ -122,7 +122,7 @@ class Ledger extends Model
         if($request->marketer_id>0)
         {
             $marketer_account   = Marketer::where('id',$request->marketer_id)->first();
-            $commission_account = Account::where('type2','commissionExpense')->first();
+            $commission_account = Account::where('type2','commissionExpense')->where('project_id',$request->project_id)->first();
             ///////////// for the commision account ////////////////////////////
             parent::create([
                 'account_id' => $commission_account->id,
@@ -182,7 +182,7 @@ class Ledger extends Model
     public static function saveDealerCommission($request,$booking_id)
     {
         $dealer_account     = Dealer::where('id',$request->dealer_id)->first();
-        $commission_account = Account::where('type2','commissionExpense')->first();
+        $commission_account = Account::where('type2','commissionExpense')->where('project_id',$request->project_id)->first();
         parent::create([
             'account_id' => $dealer_account->account_id,
             'booking_id' => $booking_id,
@@ -271,7 +271,7 @@ class Ledger extends Model
     public static function savePartnerEntry($request,$booking_id)
     {
         $partnerid = Partner::where('id',$request->partner_id)->first();
-        $partner_payble = Account::where('type2','partner_payable')->first();
+        $partner_payble = Account::where('type2','partner_payable')->where('project_id',$request->project_id)->first();
         if ($request->partner_amount_a>0)
         {
             parent::create([

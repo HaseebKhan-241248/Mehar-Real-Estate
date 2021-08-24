@@ -35,7 +35,7 @@
         <td>
             {{ number_format($total_outstanding,2) }}
         </td>
-        <td>
+        <td id="bookingstatus{{ $booking->id }}">
             @if($booking->status==1)
                 <font style="color: green">Approved</font>
             @else
@@ -74,9 +74,8 @@
                         @if($booking->status==1)
                         @else
                             <li>
-                                <a  href="{{ route('approved.booking',[$booking->id]) }}">
-                                    <i class="fa fa-check"></i>
-                                    Booking Approved
+                                <a class="bookingApproved" date-id="{{ $booking->id }}">
+                                    <i class="fa fa-check"></i>Booking Approved
                                 </a>
                             </li>
                         @endif
@@ -132,9 +131,8 @@
                         {{-- ////// else if part ///////////// --}}
                     @elseif((Auth::user()->role)=="GM")
                         <li>
-                            <a  href="{{ route('approved.booking',[$booking->id]) }}">
-                                <i class="fa fa-check"></i>
-                                Booking Approved
+                            <a class="bookingApproved" date-id="{{ $booking->id }}">
+                                <i class="fa fa-check"></i>Booking Approved
                             </a>
                         </li>
                         <li>

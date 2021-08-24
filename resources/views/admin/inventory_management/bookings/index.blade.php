@@ -329,7 +329,7 @@
                                             <select class="select2" required name="on_account_of" id="on_account_of">
                                                 <option value="">Select Account</option>
                                                 @foreach($accounts as $account)
-                                                    <option value="{{ $account->id }}">{{ $account->account_name }}</option>
+                                                    <option value="{{ $account->id }}">{{ $account->account_name }} @if($account->Project_Name)-( {{ $account->Project_Name->name }}) @endif</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -634,8 +634,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="dealer_commision_per" class="text-primary">Dealer Commission
-                                                    %</label>
+                                                <label for="dealer_commision_per" class="text-primary">Dealer Commission %</label>
                                                 <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                     <input type="number" step="any" class="form-control" onkeyup="calc()"
                                                            name="dealer_commision_per" id="dealer_commision_per" placeholder="0"
@@ -646,7 +645,7 @@
                                                 <label for="dealer_commision_value" class="text-primary">Dealer Commission Value</label>
                                                 <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                     <input type="hidden" class="form-control" name="" id="dealer_commision_value_hidden" placeholder="0" value="{{ old('dealer_commision_value') }}">
-                                                    <input type="text" class="form-control dealer_commision_value"  name="dealer_commision_value" id="dealer_commision_value" placeholder="0" value="{{ old('dealer_commision_value') }}">
+                                                    <input type="" class="form-control dealer_commision_value"  name="dealer_commision_value" id="dealer_commision_value" placeholder="0" value="{{ old('dealer_commision_value') }}">
                                                 </div>
                                             </div>
                                         </div>

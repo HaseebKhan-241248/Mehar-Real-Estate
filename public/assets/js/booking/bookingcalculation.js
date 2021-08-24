@@ -124,7 +124,7 @@ function calc()
         $('#dealer_commision_value').val(d_comm_val.toFixed(2));
         $('#dealer_commision_value_hidden').val(d_comm_val.toFixed(2));
 
-        ///////////////////////////  marketer commision value////////////
+        ///////////////////////////  marketer commision value ////////////
         var mar_comm = parseFloat(mar_dea_comm) * parseFloat(receieved_amt);
 
         $('#marketer_coms_formula').val(mar_comm.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
@@ -139,7 +139,8 @@ function calc()
     }
 }
 
-$("body").on('keyup','.intiqal_given',function (){
+$("body").on('keyup','.intiqal_given',function ()
+{
    var intiqal_given = $(this).val();
    var intiqal_actual = $('#intiqal_a').val();
    $('#intiqal_diff').val(intiqal_given-intiqal_actual);
@@ -148,13 +149,17 @@ $("body").on('keyup','.intiqal_given',function (){
 
 $("body").on('keyup','.partner_amount',function(){
     let amount       = $(this).val();
-    // var partner_per  = $('#partner_percent').val();
-    // var percentage   = partner_per/100;
     let agreed_price = $('#agreed_price').val();
     let discount     = $('#discount').val();
+    var receieved_amt= $('#received').val();
     agreed_price     = agreed_price-discount;
     percentage       = (amount/agreed_price)*100;
+    // alert(percentage);
+
+    let partnerA     = parseFloat(receieved_amt) * parseFloat(percentage/100);
     $('#partner_percent').val(percentage.toFixed(2));
+    $('#partner_amount_a').val(partnerA.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
+    $('#partner_amount_a_hidden').val(partnerA.toFixed(2));
 });
 
 $("body").on('keyup','.marketer_commision_value',function(){

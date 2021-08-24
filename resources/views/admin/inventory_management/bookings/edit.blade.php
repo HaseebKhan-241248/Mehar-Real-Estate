@@ -756,7 +756,7 @@
                                                         <input type="hidden" class="form-control" name=""
                                                                id="dealer_commision_value_hidden" placeholder="0"
                                                                value="{{ $booking->dealer_commision_value }}">
-                                                        <input type="text" class="form-control dealer_commision_value"  name=""
+                                                        <input type="" class="form-control dealer_commision_value"  name=""
                                                                id="dealer_commision_value" placeholder="0"
                                                                value="{{ $booking->dealer_commision_value }}">
                                                     </div>

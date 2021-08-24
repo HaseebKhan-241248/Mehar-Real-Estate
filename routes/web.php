@@ -178,6 +178,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/application-form/{id}',[BookingController::class,'application_form'])->name('application.form');
 
         Route::get('/approved-booking/{id}',[BookingController::class,'approved_booking'])->name('approved.booking');
+        Route::post('/approved-booking',[BookingController::class,'approved_booking'])->name('admin.approved_booking');
         Route::get('/terms-condition/{id}',[BookingController::class,'terms_condition'])->name('terms.condition');
         Route::get('/print-card/{id}',[BookingController::class,'print_card'])->name('print.card');
 

@@ -119,7 +119,7 @@
                                                     <td>{{ number_format($booking->agreed_price-$booking->discount,2) }}</td>
                                                     <td>{{number_format($booking->received,2)}}</td>
                                                     @php
-                                                        $outstandings = \App\Models\Installments\Installment::where('booking_id',$booking->id)->where('installment_amount','>','0')->where('description','!=','Booking')->where('date','<',date('Y-m-d'))->get();
+                                                         $outstandings      = \App\Models\Installments\Installment::where('booking_id',$booking->id)->where('installment_amount','>','0')->where('description','!=','Booking')->where('date','<',date('Y-m-d'))->get();
                                                          $total_outstanding = 0;
                                                          foreach ($outstandings as $outstanding)
                                                          {
@@ -129,7 +129,7 @@
                                                     <td>
                                                         {{ number_format($total_outstanding,2) }}
                                                     </td>
-                                                    <td>
+                                                    <td id="bookingstatus{{ $booking->id }}">
                                                         @if($booking->status==1)
                                                             <font style="color: green">Approved</font>
                                                         @else
@@ -168,10 +168,15 @@
                                                                     @endif
                                                                     @if($booking->status==1)
                                                                     @else
+{{--                                                                        <li>--}}
+{{--                                                                            <a  href="{{ route('approved.booking',[$booking->id]) }}">--}}
+{{--                                                                                <i class="fa fa-check"></i>--}}
+{{--                                                                                Booking Approved--}}
+{{--                                                                            </a>--}}
+{{--                                                                        </li>--}}
                                                                         <li>
-                                                                            <a  href="{{ route('approved.booking',[$booking->id]) }}">
-                                                                                <i class="fa fa-check"></i>
-                                                                                Booking Approved
+                                                                            <a class="bookingApproved" date-id="{{ $booking->id }}">
+                                                                                <i class="fa fa-check"></i>Booking Approved
                                                                             </a>
                                                                         </li>
                                                                     @endif
@@ -223,9 +228,8 @@
                                                                     {{-- ////// else if part ///////////// --}}
                                                                 @elseif((Auth::user()->role)=="GM")
                                                                     <li>
-                                                                        <a  href="{{ route('approved.booking',[$booking->id]) }}">
-                                                                            <i class="fa fa-check"></i>
-                                                                            Booking Approved
+                                                                        <a class="bookingApproved" date-id="{{ $booking->id }}">
+                                                                            <i class="fa fa-check"></i>Booking Approved
                                                                         </a>
                                                                     </li>
                                                                     <li>
@@ -418,4 +422,20 @@
         });
     </script>
     <script src="{{ asset('/assets/js/Master/master.js') }}"></script>
+    <script type="text/javascript">
+        $("body").on('click','.bookingApproved',function (){
+            let bookingId  = $(this).attr('date-id');
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var request    = $.ajax({
+                url: "{{ route('admin.approved_booking') }}",
+                method: "post",
+                data: {_token: CSRF_TOKEN, bookingId:bookingId},
+                dataType: "html"
+            });
+            request.done(function( msg ) {
+                $('#bookingstatus'+bookingId).html(`<font style="color:green;">Approved</font>`);
+                toastr.success("Booking Approved!");
+            });
+        });
+    </script>
 @endsection

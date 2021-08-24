@@ -38,6 +38,7 @@ class AccountingController extends Controller
         $end       = $request->end;
         $projectId = $request->project_id;
         $accounts  = Account::where('project_id',$projectId)->pluck('id');
+
         $data['ledgers'] = Ledger::whereBetween('day', [$start, $end])->whereIn('account_id',$accounts)->where('status',0)
             ->select([DB::raw("SUM(debit) as debit"), DB::raw("SUM(credit) as credit"),'account_id'])
             ->groupBy('account_id')

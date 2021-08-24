@@ -32,6 +32,7 @@ class BookingController extends Controller
             $data['customers'] = Customer::where('status','=','1')->get();
             $data['dealers']   = Dealer::all();
             $data['marketers'] = Marketer::all();
+            $data['accounts']  = Account::all();
         }
         else
         {
@@ -39,13 +40,14 @@ class BookingController extends Controller
             $data['customers'] = Customer::where('status','=','1')->where('project_id',Auth::user()->project_id)->get();
             $data['dealers']   = Dealer::where('project_id',Auth::user()->project_id)->get();
             $data['marketers'] = Marketer::where('project_id',Auth::user()->project_id)->get();
+            $data['accounts']  = Account::where('project_id',Auth::user()->project_id)->get();
         }
 
         $data['sectors']   = Sector::all();
         $data['blocks']    = Block::all();
         $data['plots']     = Plot::all();
         $data['heads']     = InstallmentHead::all();
-        $data['accounts']  = Account::all();
+
         return view('admin.inventory_management.bookings.index',$data);
     }
     public function list()
@@ -137,13 +139,13 @@ class BookingController extends Controller
         return view('admin.inventory_management.bookings.allotment',$data);
     }
 
-    public function approved_booking($booking_id)
+    public function approved_booking(Request $request)
     {
-        Booking::where('id',$booking_id)->update([
+        Booking::where('id',$request->bookingId)->update([
             'approved_by' => Auth::user()->id,
             'status'      => 1,
         ]);
-        return redirect()->back()->withstatus('Booking Approved Successfully!');
+//        return redirect()->back()->withstatus('Booking Approved Successfully!');
     }
     public function application_form($id)
     {
