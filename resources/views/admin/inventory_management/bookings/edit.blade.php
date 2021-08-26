@@ -422,7 +422,7 @@
                                         <div class="col-md-4">
                                             <label for="" class="text-primary">Partner Share %</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                <input type="" onkeyup="calc()" class="form-control" value="{{ $booking->partner_share }}" name="partner_percent" id="partner_percent">
+                                                <input type="" onkeyup="calc()" class="form-control" value="{{ number_format($booking->partner_share,2) }}" name="partner_percent" id="partner_percent">
                                             </div>
 
                                         </div>
@@ -431,14 +431,14 @@
                                             <input type="hidden" id="partner_id" value="{{ $booking->partner_id }}" name="partner_id">
                                             <label for="partner_amount" class="text-primary">Partner Amount</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                <input type=""  placeholder="0" value="{{ $booking->partner_amount }}" class="form-control partner_amount" id="partner_amount" name="partner_amount">
+                                                <input type=""  placeholder="0" value="{{ number_format($booking->partner_amount,2,'.','') }}" class="form-control partner_amount" id="partner_amount" name="partner_amount">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="partner_amount_a" class="text-primary">Partner Amount (A)</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                 <input type="hidden" placeholder="0" value="{{ $booking->partner_amount_a }}"class="form-control" id="partner_amount_a_hidden"name="partner_amount_a">
-                                                <input type="text" readonly placeholder="0"  value="{{ number_format($booking->partner_amount_a) }}" class="form-control"id="partner_amount_a" name="">
+                                                <input type="text" readonly placeholder="0"  value="{{ number_format($booking->partner_amount_a,2) }}" class="form-control"id="partner_amount_a" name="">
                                             </div>
                                         </div>
 
@@ -448,7 +448,7 @@
                                             <label for="payment_to_partner" class="text-primary">Payment to Partner</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                 <input type="number" onkeyup="calc()" placeholder="0" name="payment_to_partner" id="payment_to_partner"
-                                                       class="form-control" value="{{ $booking->payment_to_partner }}">
+                                                       class="form-control" value="{{ number_format($booking->payment_to_partner,2) }}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -457,7 +457,7 @@
                                                 <input type="hidden" placeholder="0" name="equity_difference"
                                                        id="equity_difference_hidden" class="form-control" value="{{ $booking->equity_difference }}">
                                                 <input type="text" readonly placeholder="0" name="" id="equity_difference"
-                                                       class="form-control" value="{{$booking->equity_difference}}">
+                                                       class="form-control" value="{{number_format($booking->equity_difference,2)}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -484,7 +484,7 @@
                                         <div class="col-md-4">
                                             <label for="size" class="text-primary">Intiqal (G)</label>
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
-                                                <input type="number" step="any" placeholder="0" value="{{ $booking->intiqal_g }}"
+                                                <input type="number" step="any" placeholder="0" value="{{ number_format($booking->intiqal_g,2) }}"
                                                        class="form-control intiqal_given" id="intiqal_g" name="intiqal_g">
                                             </div>
                                         </div>
@@ -493,7 +493,7 @@
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                 <input type="hidden" placeholder="0" value="{{ $booking->intiqal_a }}"
                                                        class="form-control" id="intiqal_a_hidden" name="intiqal_a">
-                                                <input type="text" readonly placeholder="0" value="{{ number_format($booking->intiqal_a) }}"
+                                                <input type="text" readonly placeholder="0" value="{{ number_format($booking->intiqal_a,2) }}"
                                                        class="form-control" id="intiqal_a" name="">
                                             </div>
                                         </div>
@@ -505,7 +505,7 @@
                                             <div class="col-md-12 input-group input-group-sm xs-mb-15">
                                                 <input type="hidden" placeholder="0" value="{{ $booking->intiqal_diff }}"
                                                        class="form-control" id="intiqal_diff_hidden" name="intiqal_diff">
-                                                <input type="text" placeholder="0" value="{{ number_format($booking->intiqal_diff) }}"
+                                                <input type="text" placeholder="0" value="{{ number_format($booking->intiqal_diff,2,'.','') }}"
                                                        readonly class="form-control" id="intiqal_diff" name="">
                                             </div>
                                         </div>

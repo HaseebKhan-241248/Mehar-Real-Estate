@@ -90,7 +90,7 @@
                                                 <option value="Current Assets">Current Assets</option>
 
                                                 <option value="Accounts Receivable">Accounts Receivable</option>
-{{--                                                <option value="Bank">Bank</option>--}}
+                                                <option value="Revenues">Revenues</option>
                                                 <option value="Cash & Bank">Cash & Bank</option>
                                                 <option value="Prepayments">Prepayments</option>
                                                 <option value="Deposits">Deposits</option>

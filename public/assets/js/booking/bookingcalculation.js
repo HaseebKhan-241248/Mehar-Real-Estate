@@ -143,8 +143,8 @@ $("body").on('keyup','.intiqal_given',function ()
 {
    var intiqal_given = $(this).val();
    var intiqal_actual = $('#intiqal_a').val();
-   $('#intiqal_diff').val(intiqal_given-intiqal_actual);
-   $('#intiqal_diff_hiddens').val(intiqal_given-intiqal_actual);
+   $('#intiqal_diff').val(intiqal_given-intiqal_actual.toFixed(2));
+   $('#intiqal_diff_hidden').val((intiqal_given-intiqal_actual).toFixed(2));
 });
 
 $("body").on('keyup','.partner_amount',function(){

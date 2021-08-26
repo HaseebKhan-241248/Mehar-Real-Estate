@@ -249,6 +249,7 @@
                                                     <option value="Current Asstes">Current Assets</option>
                                                     <option value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option value="Prepayments">Prepayments</option>
                                                     <option value="Deposits">Deposits</option>
                                                     <option value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -258,6 +259,7 @@
                                                     <option selected value="Current Assets">Current Assets</option>
                                                     <option value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option value="Prepayments">Prepayments</option>
                                                     <option value="Deposits">Deposits</option>
                                                     <option value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -267,6 +269,7 @@
                                                     <option  value="Current Asstes">Current Assets</option>
                                                     <option selected value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option value="Prepayments">Prepayments</option>
                                                     <option value="Deposits">Deposits</option>
                                                     <option value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -276,6 +279,7 @@
                                                     <option  value="Current Asstes">Current Assets</option>
                                                     <option  value="Accounts Receivable">Accounts Receivable</option>
                                                     <option selected value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option value="Prepayments">Prepayments</option>
                                                     <option value="Deposits">Deposits</option>
                                                     <option value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -285,6 +289,7 @@
                                                     <option  value="Current Asstes">Current Assets</option>
                                                     <option  value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option selected value="Prepayments">Prepayments</option>
                                                     <option value="Deposits">Deposits</option>
                                                     <option value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -294,6 +299,7 @@
                                                     <option  value="Current Asstes">Current Assets</option>
                                                     <option  value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option  value="Prepayments">Prepayments</option>
                                                     <option selected value="Deposits">Deposits</option>
                                                     <option value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -303,6 +309,7 @@
                                                     <option  value="Current Asstes">Current Assets</option>
                                                     <option  value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option  value="Prepayments">Prepayments</option>
                                                     <option  value="Deposits">Deposits</option>
                                                     <option selected value="Accumulated Depreciation">Accumulated Depreciation</option>
@@ -312,10 +319,21 @@
                                                     <option  value="Current Asstes">Current Assets</option>
                                                     <option  value="Accounts Receivable">Accounts Receivable</option>
                                                     <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues">Revenues</option>
                                                     <option  value="Prepayments">Prepayments</option>
                                                     <option  value="Deposits">Deposits</option>
                                                     <option  value="Accumulated Depreciation">Accumulated Depreciation</option>
                                                     <option selected value="Employee Advances">Employee Advances</option>
+                                                @elseif($account->sub_account_type == "Revenues")
+                                                    <option value="Fixed Assets">Fixed Assets</option>
+                                                    <option  value="Current Asstes">Current Assets</option>
+                                                    <option  value="Accounts Receivable">Accounts Receivable</option>
+                                                    <option value="Cash & Bank">Cash & Bank</option>
+                                                    <option value="Revenues" selected>Revenues</option>
+                                                    <option  value="Prepayments">Prepayments</option>
+                                                    <option  value="Deposits">Deposits</option>
+                                                    <option  value="Accumulated Depreciation">Accumulated Depreciation</option>
+                                                    <option  value="Employee Advances">Employee Advances</option>
                                                 @else
                                                     <option value="" >Select One</option>
                                                     <option value="Fixed Assets">Fixed Assets</option>
